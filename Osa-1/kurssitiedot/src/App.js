@@ -17,8 +17,6 @@ const App = () => {
       ]
     }
   
-
-
   const Header = (props) => (
     <div>
       <h1> {props.course.name} </h1>
