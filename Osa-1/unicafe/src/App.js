@@ -15,9 +15,16 @@ const App = () => {
     </div>
   )
 
+  const Button = (props) => (
+    <div>
+      <button> {props.text} </button>
+    </div>
+  )
+
   return (
     <div>
       <Header text = {header1}/>
+      <Button text = {"good"}/>
       <Header text = {header2}/>
     </div>
   )
