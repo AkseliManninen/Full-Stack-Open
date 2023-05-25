@@ -74,7 +74,7 @@ const App = () => {
   const Positive = () => {
     return(     
     <div>
-      positive {positive}
+      positive {positive} %
    </div>)
   }
 
