@@ -6,26 +6,38 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  const header1 = "give feedback"
-  const header2 = "statistics"
-
   const Header = (props) => (
     <div>
       <h1> {props.text} </h1>
     </div>
   )
-
+  
+  // nappi joka tekee jotain painettaessa
   const Button = (props) => (
+      <button onClick = {props.handleClick}> 
+        {props.text} 
+      </button>
+  )
+
+  // 
+  const Results = (props) => (
     <div>
-      <button> {props.text} </button>
+      {props.text}
+      {props.score}
     </div>
   )
 
   return (
     <div>
-      <Header text = {header1}/>
-      <Button text = {"good"}/>
-      <Header text = {header2}/>
+      <Header text = "give feedback"/>
+      <Button text = "good" />
+      <Button text = "neutral" />
+      <Button text = "bad" />
+      <Header text = "statistics"/>
+
+      <Results text = "good " score = {good}/>
+      <Results text = "neutral " score = {neutral}/>
+      <Results text = "bad " score = {bad}/>
     </div>
   )
 }
