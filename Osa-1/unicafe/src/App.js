@@ -17,8 +17,7 @@ const Button = (props) => (
 // näyttää tulokset eri kategorioille
 const Results = (props) => (
   <div>
-    {props.text}
-    {props.score}
+    {props.text} {props.score}
   </div>
 )
 
@@ -27,17 +26,56 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const [total, setTotal] = useState(0)
+  const [average, setAverage] = useState(0)
+  const [positive, setPositive] = useState(0)
 
   const handleGoodClick = () => {
-    setGood(good + 1)
+    const updatedGood = good + 1 
+    setGood(updatedGood)
+    const updatedTotal = updatedGood + neutral + bad
+    setTotal(updatedTotal)
+    setAverage((updatedGood - bad) / updatedTotal)
+    setPositive((updatedGood / updatedTotal) * 100)
   }
 
   const handleNeutralClick = () => {
-    setNeutral(neutral + 1)
+    const updatedNeutral = neutral + 1
+    setNeutral(updatedNeutral)
+    const updatedTotal = good + updatedNeutral + bad
+    setTotal(updatedTotal)
+    setAverage((good - bad) / updatedTotal)
+    setPositive((good / updatedTotal) * 100)
   }
 
   const handleBadClick = () => {
-    setBad(bad + 1)
+    const updatedBad = bad + 1
+    setBad(updatedBad)
+    const updatedTotal = good + neutral + updatedBad
+    setTotal(updatedTotal)
+    setAverage((good - updatedBad) / (updatedTotal))
+    setPositive((good / updatedTotal) * 100)
+  }
+
+  const All = () => {
+    return(     
+    <div>
+      all {total}
+   </div>)
+  }
+
+  const Average = () => {
+    return(     
+    <div>
+      average {average}
+   </div>)
+  }
+
+  const Positive = () => {
+    return(     
+    <div>
+      positive {positive}
+   </div>)
   }
 
   return (
@@ -47,9 +85,12 @@ const App = () => {
       <Button handleClick = {handleNeutralClick} text = "neutral" />
       <Button handleClick = {handleBadClick} text = "bad" />
       <Header text = "statistics"/>
-      <Results text = "good " score = {good}/>
-      <Results text = "neutral " score = {neutral}/>
-      <Results text = "bad " score = {bad}/>
+      <Results text = "good" score = {good}/>
+      <Results text = "neutral" score = {neutral}/>
+      <Results text = "bad" score = {bad}/>
+      <All/>
+      <Average/>
+      <Positive/>
     </div>
   )
 }
