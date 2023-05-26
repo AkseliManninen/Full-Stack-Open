@@ -2,7 +2,7 @@
 
 Osa-0, read 2/2, exercises 6/6 🟢
 
-Osa-1, read 3/4, exercises 5/14 🟡
+Osa-1, read 3/4, exercises 8/14 🟡
 
 Osa-2 🔴
 
