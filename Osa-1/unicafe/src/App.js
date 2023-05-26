@@ -17,7 +17,7 @@ const Button = (props) => (
 // näyttää tulokset eri kategorioille
 const Statistics = (props) => (
   <div>
-    {props.text} {props.score}
+    {props.text} {props.score} {props.character}
   </div>
 )
 
@@ -69,7 +69,7 @@ const App = () => {
       <Statistics text = "bad" score = {bad}/>
       <Statistics text = "all" score = {all}/>
       <Statistics text = "average" score = {average}/>
-      <Statistics text = "positive" score = {positive}/>
+      <Statistics text = "positive" score = {positive} character = "%"/>
     </div>
   )
 }
