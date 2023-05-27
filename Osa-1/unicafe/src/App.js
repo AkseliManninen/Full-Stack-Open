@@ -21,6 +21,12 @@ const Statistics = (props) => (
   </div>
 )
 
+const StatisticsLine = (props) => (
+  <div>
+    {props.text} {props.score} {props.character}
+  </div>
+)
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
