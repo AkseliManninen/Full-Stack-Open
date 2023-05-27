@@ -14,13 +14,19 @@ const Button = (props) => (
     </button>
 )
 
-// näyttää tulokset eri kategorioille
+// näyttää kaikki statistiikat
 const Statistics = (props) => (
   <div>
-    {props.text} {props.score} {props.character}
+        <StatisticsLine text = "good" score = {props.good}/>
+        <StatisticsLine text = "neutral" score = {props.neutral}/>
+        <StatisticsLine text = "bad" score = {props.bad}/>
+        <StatisticsLine text = "all" score = {props.all}/>
+        <StatisticsLine text = "average" score = {props.average}/>
+        <StatisticsLine text = "positive" score = {props.positive} character = "%"/>
   </div>
 )
 
+// näyttää yksittäisen statistiikan
 const StatisticsLine = (props) => (
   <div>
     {props.text} {props.score} {props.character}
@@ -82,12 +88,7 @@ const App = () => {
         <Button handleClick = {handleNeutralClick} text = "neutral" />
         <Button handleClick = {handleBadClick} text = "bad" />
         <Header text = "statistics"/> 
-        <Statistics text = "good" score = {good}/>
-        <Statistics text = "neutral" score = {neutral}/>
-        <Statistics text = "bad" score = {bad}/>
-        <Statistics text = "all" score = {all}/>
-        <Statistics text = "average" score = {average}/>
-        <Statistics text = "positive" score = {positive} character = "%"/>
+        <Statistics good = {good} neutral = {neutral} bad = {bad} all = {all} average = {average} positive = {positive}/>
       </div>
       )
   }
