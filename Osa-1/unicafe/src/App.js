@@ -57,21 +57,33 @@ const App = () => {
     setPositive((good / updatedAll) * 100)
   }
 
-  return (
-    <div>
+  if (all === 0) {
+    return (
+      <div>
       <Header text = "give feedback"/>
       <Button handleClick = {handleGoodClick} text = "good" />
       <Button handleClick = {handleNeutralClick} text = "neutral" />
       <Button handleClick = {handleBadClick} text = "bad" />
-      <Header text = "statistics"/>
-      <Statistics text = "good" score = {good}/>
-      <Statistics text = "neutral" score = {neutral}/>
-      <Statistics text = "bad" score = {bad}/>
-      <Statistics text = "all" score = {all}/>
-      <Statistics text = "average" score = {average}/>
-      <Statistics text = "positive" score = {positive} character = "%"/>
-    </div>
-  )
-}
+      <Header text = "statistics"/> 
+      No feedback given
+      </div>
+      )
+    }
+    return (
+      <div>
+        <Header text = "give feedback"/>
+        <Button handleClick = {handleGoodClick} text = "good" />
+        <Button handleClick = {handleNeutralClick} text = "neutral" />
+        <Button handleClick = {handleBadClick} text = "bad" />
+        <Header text = "statistics"/> 
+        <Statistics text = "good" score = {good}/>
+        <Statistics text = "neutral" score = {neutral}/>
+        <Statistics text = "bad" score = {bad}/>
+        <Statistics text = "all" score = {all}/>
+        <Statistics text = "average" score = {average}/>
+        <Statistics text = "positive" score = {positive} character = "%"/>
+      </div>
+      )
+  }
 
 export default App
