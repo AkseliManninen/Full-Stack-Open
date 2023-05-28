@@ -17,21 +17,23 @@ const Button = (props) => (
 // näyttää kaikki statistiikat
 const Statistics = (props) => (
   <div>
+    <table>
         <StatisticsLine text = "good" score = {props.good}/>
         <StatisticsLine text = "neutral" score = {props.neutral}/>
         <StatisticsLine text = "bad" score = {props.bad}/>
         <StatisticsLine text = "all" score = {props.all}/>
         <StatisticsLine text = "average" score = {props.average}/>
         <StatisticsLine text = "positive" score = {props.positive} character = "%"/>
+    </table>
   </div>
 )
 
 // näyttää yksittäisen statistiikan
 const StatisticsLine = (props) => (
-  <div>
-    <td>{props.text}</td>
-    <td>{props.score} {props.character}</td>
-  </div>
+  <tr>
+    <td align> {props.text}</td>
+    <td>  {props.score} {props.character}  </td>
+  </tr>
 )
 
 const App = () => {
