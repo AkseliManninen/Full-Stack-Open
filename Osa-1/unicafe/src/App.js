@@ -29,7 +29,8 @@ const Statistics = (props) => (
 // näyttää yksittäisen statistiikan
 const StatisticsLine = (props) => (
   <div>
-    {props.text} {props.score} {props.character}
+    <td>{props.text}</td>
+    <td>{props.score} {props.character}</td>
   </div>
 )
 
