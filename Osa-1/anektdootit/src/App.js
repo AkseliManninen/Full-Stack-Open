@@ -21,11 +21,16 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
 
+  const nextAnecdoteOnClick = (props) => {
+    const next = Math.floor(Math.random() * 8)
+    setSelected(next)
+  }
+
   return (
     <div>
       {anecdotes[selected]}
       <div>
-        <Button text="next anecdote" />
+        <Button handleClick = {nextAnecdoteOnClick} text="next anecdote" />
       </div>
     </div>
   )
