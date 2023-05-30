@@ -1,5 +1,12 @@
 import { useState } from 'react'
 
+// nappi joka tekee jotain painettaessa
+const Button = (props) => (
+  <button onClick = {props.handleClick}> 
+    {props.text} 
+  </button>
+)
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -17,6 +24,9 @@ const App = () => {
   return (
     <div>
       {anecdotes[selected]}
+      <div>
+        <Button text="next anecdote" />
+      </div>
     </div>
   )
 }
