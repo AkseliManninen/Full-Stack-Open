@@ -10,7 +10,7 @@ const Button = (props) => (
 // nappi joka tekee jotain painettaessa
 const Votes = (props) => (
   <div>
-    has 7 votes
+    has {props.votes} votes
   </div>
 )
 
@@ -33,10 +33,13 @@ const App = () => {
     setSelected(next)
   }
 
+  // const votes = [0, 0, 0, 0, 0, 0, 0, 0]
+  const votes = [0, 1, 2, 3, 4, 5, 6, 7]
+
   return (
     <div>
       {anecdotes[selected]}
-      <Votes/>
+      <Votes votes = {votes[selected]}/>
       <div>
         <Button text="vote" />
         <Button handleClick = {nextAnecdoteOnClick} text="next anecdote" />
