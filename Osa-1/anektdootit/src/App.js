@@ -37,12 +37,22 @@ const App = () => {
     0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0
   })
 
+  const [maxVotesIndex, setMaxVotesIndex] = useState(0)
+
   const voteOnClick = (props) => {
+    
+    // Lisää äänen nappia painaessa
     const newVotes = { 
       ...votes, 
-      [selected]:  votes[selected] + 1
+      [selected]: votes[selected] + 1
     }
     setVotes(newVotes)
+    
+    // Etsii indeksin, jolla on suurin äänimäärä
+    const voteCounts = Object.values(newVotes)
+    const maxVotes = Math.max(...voteCounts)
+    const maxVotesIndex = voteCounts.indexOf(maxVotes)
+    setMaxVotesIndex(maxVotesIndex)
   }
 
   return (
@@ -55,6 +65,8 @@ const App = () => {
         <Button handleClick = {nextAnecdoteOnClick} text="next anecdote" />
       </div>
       <h1>Anecdote with most votes</h1>
+      {anecdotes[maxVotesIndex]}
+      <Votes votes = {votes[maxVotesIndex]}/>
     </div>
   )
 }
