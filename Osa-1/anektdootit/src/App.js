@@ -22,7 +22,7 @@ const App = () => {
   const [selected, setSelected] = useState(0)
 
   const nextAnecdoteOnClick = (props) => {
-    const next = Math.floor(Math.random() * 8)
+    const next = Math.floor(Math.random() * anecdotes.length)
     setSelected(next)
   }
 
