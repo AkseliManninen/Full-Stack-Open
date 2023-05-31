@@ -33,15 +33,24 @@ const App = () => {
     setSelected(next)
   }
 
-  // const votes = [0, 0, 0, 0, 0, 0, 0, 0]
-  const votes = [0, 1, 2, 3, 4, 5, 6, 7]
+  const [votes, setVotes] = useState({
+    0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0
+  })
+
+  const voteOnClick = (props) => {
+    const newVotes = { 
+      ...votes, 
+      [selected]:  votes[selected] + 1
+    }
+    setVotes(newVotes)
+  }
 
   return (
     <div>
       {anecdotes[selected]}
       <Votes votes = {votes[selected]}/>
       <div>
-        <Button text="vote" />
+        <Button handleClick = {voteOnClick} text="vote" />
         <Button handleClick = {nextAnecdoteOnClick} text="next anecdote" />
       </div>
     </div>
