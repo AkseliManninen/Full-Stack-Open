@@ -7,6 +7,13 @@ const Button = (props) => (
   </button>
 )
 
+// nappi joka tekee jotain painettaessa
+const Votes = (props) => (
+  <div>
+    has 7 votes
+  </div>
+)
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -29,7 +36,9 @@ const App = () => {
   return (
     <div>
       {anecdotes[selected]}
+      <Votes/>
       <div>
+        <Button text="vote" />
         <Button handleClick = {nextAnecdoteOnClick} text="next anecdote" />
       </div>
     </div>
