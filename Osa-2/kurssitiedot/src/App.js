@@ -1,16 +1,17 @@
+// Muotoilee kurssin ja sen osat
+const Course = (props) => {
+  const parts = props.course.parts
+  return(
+  <div>
+    <h1>{props.course.name}</h1>
+    <p>
+      {parts.map(part => <p>{part.name} {part.exercises}</p>)}
+    </p>
+  </div>
+  )
+}
+
 const App = () => {
-  
-  const Course = (props) => {
-    const parts = props.course.parts
-    return(
-    <div>
-      <h1>{props.course.name}</h1>
-      <p>
-        {parts.map(parts => <p>{parts.name} {parts.exercises}</p>)}
-      </p>
-    </div>
-    )
-  }
   
   const course = {
     name: 'Half Stack application development',
@@ -33,10 +34,13 @@ const App = () => {
       }
     ]
   }
+  
+  const total = course.parts.reduce((s, part) => s + part.exercises, 0)
 
   return (
     <div>
       <Course course={course} />
+      <p>total of {total} excercises</p>
     </div>
   )
 }
