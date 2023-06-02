@@ -1,4 +1,17 @@
 const App = () => {
+  
+  const Course = (props) => {
+    const parts = props.course.parts
+    return(
+    <div>
+      <h1>{props.course.name}</h1>
+      <p>
+        {parts.map(parts => <p>{parts.name} {parts.exercises}</p>)}
+      </p>
+    </div>
+    )
+  }
+  
   const course = {
     name: 'Half Stack application development',
     id: 1,
