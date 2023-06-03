@@ -8,14 +8,24 @@ const App = () => {
   const [newName, setNewName] = useState('')
 
   const addPerson = (event) => {
+    // estää alkuperäisen arvon lisäämisen
     event.preventDefault()
-    console.log('button clicked', event.target)
-    const personObject = {
-      name: newName
+    // estää olemassa olevan arvon lisäämisen
+    if (persons.map(person => person.name).includes(newName)) {
+      alert(`${newName} is already added to phonebook`)
     }
-    setPersons(persons.concat(personObject))
-    setNewName("")
+    else {
+      console.log('button clicked', event.target)
+      // luo uuden person-objektin
+      const personObject = {
+        name: newName
+      }
+      // lisää person objectin persons-listalle
+      setPersons(persons.concat(personObject))
+      setNewName("")
+    }
   }
+
 
   const handlePersonChange = (event) => {
     console.log(event.target.value)
@@ -35,7 +45,7 @@ const App = () => {
           <button type="submit">add</button>
         </div>
       </form>
-      <h2>Numbersz</h2>
+      <h2>Numbers</h2>
       <p> {persons.map(person => <p> {person.name} </p>)} </p>
     </div>
   )
