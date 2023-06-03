@@ -6,10 +6,15 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
 
+  const addNumber = (event) => {
+    event.preventDefault()
+    console.log('button clicked', event.target)
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
+      <form onSubmit = {addNumber}>
         <div>
           name: <input />
         </div>
@@ -18,10 +23,11 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      ...
+      <p> {persons.map(person => person.name)} </p>
     </div>
   )
 
 }
 
 export default App
+
