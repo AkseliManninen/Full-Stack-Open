@@ -1,5 +1,13 @@
 import { useState } from 'react'
 
+// filtteröintilomake
+const FilteredForm = (props) => (
+  <div>
+    <h2>Numbers</h2>
+    <p> {props.show.map(person => <p> {person.name} {person.number} </p>)} </p>
+  </div>
+  )
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
@@ -45,12 +53,12 @@ const App = () => {
   }
 
   // filteröi nimiä syötteen mukaan
-  const handleFilterChange = (event) => {
-    console.log(event.target.value)
-    const newFilterName = event.target.value
+  const handleFilterChange = (props) => {
+    console.log(props.target.value)
+    const newFilterName = props.target.value
     setNewFilterName(newFilterName)
     setShow(persons.filter(person => person.name.toLowerCase().includes(newFilterName.toLocaleLowerCase())))
-  }
+}
 
   return (
     <div>
@@ -77,8 +85,7 @@ const App = () => {
           <button type="submit">add</button>
         </div>
       </form>
-      <h2>Numbers</h2>
-      <p> {show.map(person => <p> {person.name} {person.number} </p>)} </p>
+      <FilteredForm show = {show}/>
     </div>
   )
 }
