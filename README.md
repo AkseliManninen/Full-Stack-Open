@@ -4,7 +4,7 @@ Osa-0, read 2/2, exercises 6/6 🟢
 
 Osa-1, read 4/4, exercises 14/14 🟢
 
-Osa-2 read 1/5, exercises 5/20 🟡
+Osa-2 read 2/5, exercises 10/20 🟡
 
 Osa-3 🔴
 
@@ -23,4 +23,4 @@ Osa-7 🔴
 🔴 = Not started
 
 Tehtävät: 
-25 / 116+
+30 / 116+
