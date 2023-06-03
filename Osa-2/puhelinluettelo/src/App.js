@@ -1,7 +1,28 @@
 import { useState } from 'react'
 
+// uuden henkilön lisäävä lomakes
+const NewPersonForm = (props) => (
+  <div>
+    <h2>add a new</h2>
+      <form onSubmit = {props.addPerson}>
+        <div>
+          name: <input 
+          value={props.newName}
+          onChange={props.handlePersonChange}/>
+        </div>
+        <div>number: <input
+          value={props.newNumber}
+          onChange={props.handleNumberChange}/>
+        </div>
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
+  </div>
+  )
+
 // filtteröintilomake
-const FilteredForm = (props) => (
+const FilteredForm= (props) => (
   <div>
     <h2>Numbers</h2>
     <p> {props.show.map(person => <p> {person.name} {person.number} </p>)} </p>
@@ -37,6 +58,10 @@ const App = () => {
       }
       // lisää person objectin persons-listalle
       setPersons(persons.concat(personObject))
+      // lisää person objectin show-listalle, jos täyttää filtteröinnin ehdot
+      if (personObject.name.toLocaleLowerCase().includes(filterName.toLocaleLowerCase())) {
+        setShow(show.concat(personObject))
+      }      
       setNewName("")
       setNewNumber("")
     }
@@ -70,21 +95,7 @@ const App = () => {
           onChange={handleFilterChange}/>
         </div>
       </form>
-      <h2>add a new</h2>
-      <form onSubmit = {addPerson}>
-        <div>
-          name: <input 
-          value={newName}
-          onChange={handlePersonChange}/>
-        </div>
-        <div>number: <input
-          value={newNumber}
-          onChange={handleNumberChange}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <NewPersonForm addPerson={addPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
       <FilteredForm show = {show}/>
     </div>
   )
