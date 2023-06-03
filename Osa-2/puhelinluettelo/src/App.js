@@ -1,7 +1,18 @@
 import { useState } from 'react'
 
-// uuden henkilön lisäävä lomakes
-const NewPersonForm = (props) => (
+// filteröintilomake
+const Filter = (props) => (
+  <form>
+  <div>
+    filter shown with <input
+    value={props.filterName}
+    onChange={props.handleFilterChange}/>
+  </div>
+</form>
+)
+
+// uuden henkilön lisäävä lomake
+const PersonForm = (props) => (
   <div>
     <h2>add a new</h2>
       <form onSubmit = {props.addPerson}>
@@ -21,8 +32,8 @@ const NewPersonForm = (props) => (
   </div>
   )
 
-// filtteröintilomake
-const FilteredForm= (props) => (
+// kaikki henkilöt renderöivä komponentti
+const Persons= (props) => (
   <div>
     <h2>Numbers</h2>
     <p> {props.show.map(person => <p> {person.name} {person.number} </p>)} </p>
@@ -88,15 +99,9 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
-        <div>
-          filter shown with <input
-          value={filterName}
-          onChange={handleFilterChange}/>
-        </div>
-      </form>
-      <NewPersonForm addPerson={addPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
-      <FilteredForm show = {show}/>
+      <Filter filterName={filterName} handleFilterChange={handleFilterChange}/>
+      <PersonForm addPerson={addPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
+      <Persons show = {show}/>
     </div>
   )
 }
