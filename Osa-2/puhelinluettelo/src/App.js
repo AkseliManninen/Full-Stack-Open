@@ -84,6 +84,13 @@ const App = () => {
       }      
       setNewName("")
       setNewNumber("")
+
+      //  lähettää muistiinpanon palvelimelle
+      axios
+        .post('http://localhost:3001/persons', personObject)
+        .then(then(response => {
+          console.log(response)
+        }))
     }
   }
 
