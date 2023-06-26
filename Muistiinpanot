@@ -2,10 +2,16 @@ Muistiinpanot:
 
 Osa-1:
 
+a. Reactin alkeet
+
 React-sovelluksen luominen: npx create-react-app <nimi>
 Sovelluksen käynnistäminen: npm start
 
 
 Osa-2:
 
+c. Palvelimella olevan datan hakeminen
+
 Promisella on kolme mahdollista tilaa: Pending, fullfilled/resolved ja rejected
+
+Serveri voidaan käynnistää komennolla: npx json-server --port=3001 --watch db.json
