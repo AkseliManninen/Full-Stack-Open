@@ -85,12 +85,12 @@ const App = () => {
       setNewName("")
       setNewNumber("")
 
-      //  lähettää muistiinpanon palvelimelle
+      // lähettää muistiinpanon palvelimelle
       axios
-        .post('http://localhost:3001/persons', personObject)
-        .then(then(response => {
-          console.log(response)
-        }))
+       .post('http://localhost:3001/persons', personObject)
+       .then(response => {
+        console.log(response)
+      })
     }
   }
 
