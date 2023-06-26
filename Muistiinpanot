@@ -1,5 +1,11 @@
 Muistiinpanot:
 
+Osa-1:
+
+React-sovelluksen luominen: npx create-react-app <nimi>
+Sovelluksen käynnistäminen: npm start
+
+
 Osa-2:
 
 Promisella on kolme mahdollista tilaa: Pending, fullfilled/resolved ja rejected
