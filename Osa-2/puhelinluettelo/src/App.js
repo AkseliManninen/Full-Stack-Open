@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import personsService from "./services/persons"
 
 // filteröintilomake
@@ -87,8 +86,8 @@ const App = () => {
       setNewNumber("")
 
       // lähettää muistiinpanon palvelimelle
-      axios
-       .post('http://localhost:3001/persons', personObject)
+      personsService
+       .create(personObject)
        .then(response => {
         console.log(response)
       })
