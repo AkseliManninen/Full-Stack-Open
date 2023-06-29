@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-const baseUrl = "http://localhost:3001/persons"
+import personsService from "./services/persons"
 
 // filteröintilomake
 const Filter = (props) => (
@@ -53,8 +53,8 @@ const App = () => {
   // effect hook, joka hakee persons-tiedot db.json-dokumentista
   useEffect(() => {
     console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
+      personsService
+      .getAll()
       .then(response => {
         console.log('promise fulfilled')
         setPersons(response.data)
