@@ -37,9 +37,16 @@ const PersonForm = (props) => (
 const Persons= (props) => (
   <div>
     <h2>Numbers</h2>
-    <p> {props.show.map(person => <p> {person.name} {person.number} </p>)} </p>
+    <p> {props.show.map(person => <p> {person.name} {person.number} <DeleteButton/> </p>)} </p>
   </div>
   )
+
+// nappi, joka poistaa painettaessa yhteystiedon
+// toteuta loppuun type="delete"
+const DeleteButton = (props) => (
+  <button type="submit">delete</button>
+)
+
 
 const App = () => {
 

@@ -9,6 +9,7 @@ const create = newObject => {
   return axios.post(baseUrl, newObject)
 }
 
+// Poista lopuksi jos ei ole tarpeellinen
 const update = (id, newObject) => {
   return axios.put(`${baseUrl}/${id}`, newObject)
 }
