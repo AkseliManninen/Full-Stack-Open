@@ -39,25 +39,15 @@ const Persons= (props) => (
   <div>
     <h2>Numbers</h2>
     <p>
-      {props.show.map((person) => (
+      {props.persons.map((person) => (
         <p key={person.id}>
           {person.name} {person.number}{" "}
-          <button onClick={() => deletePerson(person)}>delete</button>
+          <button onClick={() => {props.handleDeletePerson(person)}}>delete</button>
         </p>
       ))}
     </p>
   </div>
   )
-
-// funktio: poistaa yhteystiedon palvelilmelta
-const deletePerson = (person) => {
-  console.log(`deleting id ${person.id}`)
-  personsService
-    .deletePerson(person.id)
-    .then(response => {
-      console.log(response)
-    })
-}
 
 const App = () => {
 
@@ -111,6 +101,22 @@ const App = () => {
     }
   }
 
+  // funktio: poistaa yhteystiedon palvelilmelta
+  const handleDeletePerson = (person) => {
+    console.log(`deleting id ${person.id}`)
+    personsService
+      .deletePerson(person.id)
+      .then(response => {
+        console.log(response)
+        personsService
+        .getAll()
+        .then(response => {
+          setPersons(response.data)
+          setShow(response.data); 
+        });
+      })
+}
+
   const handlePersonChange = (event) => {
     console.log(event.target.value)
     setNewName(event.target.value)
@@ -134,7 +140,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter filterName={filterName} handleFilterChange={handleFilterChange}/>
       <PersonForm addPerson={addPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
-      <Persons show = {show}/>
+      <Persons persons = {show} handleDeletePerson={handleDeletePerson}/>
     </div>
   )
 }
