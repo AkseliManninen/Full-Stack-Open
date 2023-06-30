@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import personsService from "./services/persons"
 
-// filteröintilomake
+// lomake: filteröi syötteen mukaan näytettävät yhteystiedot
 const Filter = (props) => (
   <form>
   <div>
@@ -33,7 +33,8 @@ const PersonForm = (props) => (
   </div>
   )
 
-// kaikki henkilöt renderöivä komponentti
+
+
 const Persons= (props) => (
   <div>
     <h2>Numbers</h2>
@@ -41,12 +42,16 @@ const Persons= (props) => (
   </div>
   )
 
-// nappi, joka poistaa painettaessa yhteystiedon
-// toteuta loppuun type="delete"
+// nappi: poistaa painettaessa yhteystiedon palvelimelta (t. 2.14)
 const DeleteButton = (props) => (
-  <button type="submit">delete</button>
+  <button handelClick = {deletePerson(props.id)} >delete</button>
 )
 
+// funktio: poistaa yhteystiedon palvelilmelta (t. 2.14)
+const deletePerson = (id) => {
+  console.log("deleting id" + id)
+
+}
 
 const App = () => {
 
