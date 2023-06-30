@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import personsService from "./services/persons"
 
-// lomake: filteröi syötteen mukaan näytettävät yhteystiedot
+// komponentti: lomake filteröi syötteen mukaan näytettävät yhteystiedot
 const Filter = (props) => (
   <form>
   <div>
@@ -12,7 +12,7 @@ const Filter = (props) => (
 </form>
 )
 
-// uuden henkilön lisäävä lomake
+// komponentti: lomake jolla lisätään uuden henkilön yhteystidot
 const PersonForm = (props) => (
   <div>
     <h2>add a new</h2>
@@ -34,23 +34,29 @@ const PersonForm = (props) => (
   )
 
 
-
+// komponentti: renderöi kaikki henkilöt
 const Persons= (props) => (
   <div>
     <h2>Numbers</h2>
-    <p> {props.show.map(person => <p> {person.name} {person.number} <DeleteButton/> </p>)} </p>
+    <p>
+      {props.show.map((person) => (
+        <p key={person.id}>
+          {person.name} {person.number}{" "}
+          <button onClick={() => deletePerson(person)}>delete</button>
+        </p>
+      ))}
+    </p>
   </div>
   )
 
-// nappi: poistaa painettaessa yhteystiedon palvelimelta (t. 2.14)
-const DeleteButton = (props) => (
-  <button handelClick = {deletePerson(props.id)} >delete</button>
-)
-
-// funktio: poistaa yhteystiedon palvelilmelta (t. 2.14)
-const deletePerson = (id) => {
-  console.log("deleting id" + id)
-
+// funktio: poistaa yhteystiedon palvelilmelta
+const deletePerson = (person) => {
+  console.log(`deleting id ${person.id}`)
+  personsService
+    .deletePerson(person.id)
+    .then(response => {
+      console.log(response)
+    })
 }
 
 const App = () => {
@@ -61,7 +67,7 @@ const App = () => {
   const [filterName, setNewFilterName] = useState('')
   const [show, setShow] = useState(persons)
 
-  // effect hook, joka hakee persons-tiedot db.json-dokumentista
+  // effect hook: hakee persons-tiedot db.json-dokumentista
   useEffect(() => {
     console.log('effect')
       personsService
@@ -75,9 +81,8 @@ const App = () => {
   }, [])
 
   const addPerson = (event) => {
-    // estää alkuperäisen arvon lisäämisen
+    // funktio estää oletusarvon ja olemassa olevan nimen lisäämisen
     event.preventDefault()
-    // estää olemassa olevan arvon lisäämisen
     if (persons.map(person => person.name).includes(newName)) {
       alert(`${newName} is already added to phonebook`)
     }
