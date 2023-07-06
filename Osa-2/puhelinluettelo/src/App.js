@@ -73,7 +73,15 @@ const App = () => {
     // funktio estää oletusarvon ja olemassa olevan nimen lisäämisen
     event.preventDefault()
     if (persons.map(person => person.name).includes(newName)) {
-      alert(`${newName} is already added to phonebook`)
+      //alert(`${newName} is already added to phonebook`)
+      
+      const existingPerson = persons.find((person) => person.name === newName)
+      
+      const personObject = {
+        name: newName,
+        number: newNumber
+      }
+      handleUpdateNumber(existingPerson, personObject)
     }
     else {
       console.log('button clicked', event.target)
@@ -118,6 +126,23 @@ const App = () => {
       })
     }
 }
+
+  // Vaihtaa olemassa olevan henkilön puhelinnumeron
+  const handleUpdateNumber = (person, newObject) => {
+    if (window.confirm(`${person.name} is already added to phonebook, replace the old number with a new one?`)) {
+      personsService
+        .updateNumber(person.id, newObject)
+        .then(response => {
+          console.log(response)
+          personsService
+        .getAll()
+          .then(response => {
+          setPersons(response.data)
+          setShow(response.data); 
+        }
+    )}
+    )}
+  }
 
   const handlePersonChange = (event) => {
     console.log(event.target.value)
