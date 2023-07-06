@@ -33,7 +33,6 @@ const PersonForm = (props) => (
   </div>
   )
 
-
 // komponentti: renderöi kaikki henkilöt
 const Persons= (props) => (
   <div>
@@ -83,27 +82,29 @@ const App = () => {
         name: newName,
         number: newNumber
       }
-      // lisää person objectin persons-listalle
-      setPersons(persons.concat(personObject))
-      // lisää person objectin show-listalle, jos täyttää filtteröinnin ehdot
-      if (personObject.name.toLocaleLowerCase().includes(filterName.toLocaleLowerCase())) {
-        setShow(show.concat(personObject))
-      }      
-      setNewName("")
-      setNewNumber("")
 
       // lähettää muistiinpanon palvelimelle
       personsService
-       .create(personObject)
-       .then(response => {
-        console.log(response)
-      })
+        .create(personObject)
+        .then((response) => {
+            // lisää person objectin persons-listalle
+            const updatedPersons = [...persons, response.data];
+            setPersons(updatedPersons);
+            // lisää person objectin show-listalle, jos täyttää filtteröinnin ehdot
+            if (personObject.name.toLowerCase().includes(filterName.toLowerCase())) {
+              setShow(updatedPersons);
+          }
+
+      setNewName("")
+      setNewNumber("")
+        })
     }
   }
 
   // funktio: poistaa yhteystiedon palvelilmelta
   const handleDeletePerson = (person) => {
     console.log(`deleting id ${person.id}`)
+    if (window.confirm(`Delete ${person.name}?`)) {
     personsService
       .deletePerson(person.id)
       .then(response => {
@@ -115,6 +116,7 @@ const App = () => {
           setShow(response.data); 
         });
       })
+    }
 }
 
   const handlePersonChange = (event) => {
