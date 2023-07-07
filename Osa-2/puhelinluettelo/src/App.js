@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import personsService from "./services/persons"
+import './index.css'
 
 // komponentti: lomake filteröi syötteen mukaan näytettävät yhteystiedot
 const Filter = (props) => (
@@ -48,6 +49,20 @@ const Persons= (props) => (
   </div>
   )
 
+// komponentti: antaa ilmoituksen
+const Notification = ({ message }) => {
+  if (message === null) {
+    return null
+  }
+
+  return (
+    // luokka: divissä annettu success-luokka tyylien lisäämistä varten
+    <div className="success"> 
+      {message}
+    </div>
+  )
+}
+
 const App = () => {
 
   const [persons, setPersons] = useState([]) 
@@ -55,6 +70,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filterName, setNewFilterName] = useState('')
   const [show, setShow] = useState(persons)
+  const [successMessage, setSuccessMessage] = useState('')
 
   // effect hook: hakee persons-tiedot db.json-dokumentista
   useEffect(() => {
@@ -101,13 +117,17 @@ const App = () => {
             // lisää person objectin show-listalle, jos täyttää filtteröinnin ehdot
             if (personObject.name.toLowerCase().includes(filterName.toLowerCase())) {
               setShow(updatedPersons);
-          }
-
+          }})
+        .then(() => {
+          setSuccessMessage(`Added ${personObject.name}`)
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 5000)
+      })
       setNewName("")
       setNewNumber("")
-        })
-    }
-  }
+        }
+      }
 
   // funktio: poistaa yhteystiedon palvelilmelta
   const handleDeletePerson = (person) => {
@@ -138,10 +158,17 @@ const App = () => {
         .getAll()
           .then(response => {
           setPersons(response.data)
-          setShow(response.data); 
+          setShow(response.data) 
         }
-    )}
-    )}
+      )}
+      )
+      .then(() => {
+        setSuccessMessage(`Changed ${newObject.name}'s number to ${newObject.number}`)
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000)
+    })
+    }
   }
 
   const handlePersonChange = (event) => {
@@ -165,6 +192,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={successMessage} />
       <Filter filterName={filterName} handleFilterChange={handleFilterChange}/>
       <PersonForm addPerson={addPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
       <Persons persons = {show} handleDeletePerson={handleDeletePerson}/>
