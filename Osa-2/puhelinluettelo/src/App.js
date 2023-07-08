@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+ 
 import personsService from "./services/persons"
 import './index.css'
 
