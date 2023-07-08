@@ -11,6 +11,7 @@ const CountryForm = (props) => (
   </div>
   );
 
+// 
 
 // komponentti: renderöi maat
 const Countries = (props) => { 
@@ -24,7 +25,7 @@ const Countries = (props) => {
 
   else if (numberOfCountries <= 10 && numberOfCountries > 1) {
     console.log("Under 10 countries and over 1 country")
-    return props.countries.map((country) => <p>{country.name.common}</p>)
+    return props.countries.map((country) => <p>{country.name.common} <button onClick={() => {props.handleShowCountry(country)}}>show</button> </p>)
   }
 
   else if (numberOfCountries === 1) {
@@ -80,10 +81,17 @@ const App = () => {
     setShowCountries(countries.filter(country => country.name.common.toLowerCase().includes(newFilterInput.toLocaleLowerCase())))
   }
 
+    // funktio: näyttää maan tiedot nappia painattaessa
+    const handleShowCountry = (country) => {
+      console.log(country);
+      setNewFilterInput(country.name.common);
+      setShowCountries([country]);
+    };
+
   return (
     <div>
       <CountryForm filterInput={filterInput} handleFilterInputChange={handleFilterInputChange}/>
-      <Countries countries = {showCountries}/>
+      <Countries countries = {showCountries} handleShowCountry = {handleShowCountry}/>
     </div>
   );
 }
