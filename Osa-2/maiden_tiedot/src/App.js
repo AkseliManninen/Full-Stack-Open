@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import countriesService from "./services/countries"
 
-// komponentti: lomake jolla etsitään maita
-const CountryForm = () => (
+// komponentti: lomake jolla etsitään ja rajataan maita
+// kun lomakkeeseen kirjoitetaan tekstiä, triggeröityy props.handöeFilterInputChange, joka rajaa maalistaa syötteen mukaan
+const CountryForm = (props) => (
   <div>
     <form>
-        find countries <input type="text" />
+        find countries <input value={props.filterInput} onChange={props.handleFilterInputChange} />
     </form>
   </div>
   );
@@ -13,20 +14,42 @@ const CountryForm = () => (
 
 // komponentti: renderöi maat
 const Countries = (props) => { 
+  
   const numberOfCountries = props.countries.length
-  if (numberOfCountries >= 10) {
+  
+  if (numberOfCountries > 10) {
+    console.log("Over 10 countries")
     return <p>Too many matches, speficy another filter</p>
   }
 
-  else if (numberOfCountries < 10 && props.countries > 1) {
-    return <p>Showing countries list</p>
+  else if (numberOfCountries <= 10 && numberOfCountries > 1) {
+    console.log("Under 10 countries and over 1 country")
+    return props.countries.map((country) => <p>{country.name.common}</p>)
   }
 
   else if (numberOfCountries === 1) {
-    return <p>Showing country's information</p>
+    console.log("One country")
+    return props.countries.map((country) => 
+    <div>
+      <h1>{country.name.common}</h1>
+      <p>
+        capital {country.capital}
+        <br />
+        area {country.area}
+      </p>
+      <h2>languages:</h2>
+      <ul>
+        {Object.keys(country.languages).map((abbreviation) => (
+          <li key={abbreviation}>{country.languages[abbreviation]}</li>
+        ))}
+      </ul>
+      <img src={country.flags.png} alt={country.flags.alt} />
+    </div>
+    )
   }
 
   else {
+    console.log("Under one country country")
     return <p>No countries match the search</p>
   }
 
@@ -34,6 +57,8 @@ const Countries = (props) => {
 
 const App = () => {
   const [countries, setCountries] = useState([]) 
+  const [showCountries, setShowCountries] = useState(countries)
+  const [filterInput, setNewFilterInput] = useState('')
 
   // effect hook: hakee countries-tiedot https://studies.cs.helsinki.fi/restcountries/api/all apista
   useEffect(() => {
@@ -46,12 +71,19 @@ const App = () => {
         console.log(response.data)
       })
   }, [])
-  
-  
+
+  // funktio: filtteröi maita syötteen mukaan
+  const handleFilterInputChange = (props) => {
+    console.log(props.target.value)
+    const newFilterInput = props.target.value
+    setNewFilterInput(newFilterInput)
+    setShowCountries(countries.filter(country => country.name.common.toLowerCase().includes(newFilterInput.toLocaleLowerCase())))
+  }
+
   return (
     <div>
-      <CountryForm/>
-      <Countries countries = {countries}/>
+      <CountryForm filterInput={filterInput} handleFilterInputChange={handleFilterInputChange}/>
+      <Countries countries = {showCountries}/>
     </div>
   );
 }
