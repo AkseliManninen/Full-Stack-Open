@@ -12,9 +12,9 @@ Osa-2:
 
 c. Palvelimella olevan datan hakeminen
 
-Promisella on kolme mahdollista tilaa: Pending, fullfilled/resolved ja rejected
+- Promisella on kolme mahdollista tilaa: Pending, fullfilled/resolved ja rejected
 
-Serveri voidaan käynnistää komennolla: npx json-server --port=3001 --watch db.json
+- Serveri voidaan käynnistää komennolla: npx json-server --port=3001 --watch db.json
 
 e. Tyylien lisääminen React-sovellukseen
 
@@ -40,3 +40,25 @@ Lomakkeen luominen:
 </form>
 
 - Lomakkeen luominen vaatii sekä form että input osiot
+
+Aaltosulut {}: Käytetään kun on dynaamisia arvoja tai JavaScript expressioneita. Käytetään esimerkiksi laskuihin tai ehdolliseen renderöintiin.
+
+Esimerkkejä:
+
+{variableName}
+{1 + 2}
+
+Sulut (): Käytetään ryhmittelemään useita JSX elementtejä tai komponentteja yhteen.
+
+Os-3
+
+a. Node.js ja expressioneita
+
+- Express on ohjelmointirajapinnan tarjoava kirjasto
+
+- Projektin riippuvuudet päivitetään komennolla npm update
+
+- npm init luo rungon projektille
+
+- Selaimen puolella käytetään (nykyään) ES6:n moduuleita, eli moduulit määritellään exportilla ja otetaan käyttöön importilla.
+Node.js kuitenkin käyttää ns. CommonJS-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla.

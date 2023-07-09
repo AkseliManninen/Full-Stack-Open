@@ -6,7 +6,7 @@ Osa-1, read 4/4, exercises 14/14 🟢
 
 Osa-2 read 5/5, exercises 19/20 (skipped 2.17*) 🟢 
 
-Osa-3 exercises 0/22 🔴 
+Osa-3 exercises read a. kohdassa REST /4 1/22 🟡
 
 Osa-4 exercises 0/23 🔴
 
@@ -22,5 +22,5 @@ Osa-7 exercises 0/21 🔴
 
 🔴 = Not started
 
-Tehtävät: 
-39 / 116+
+Excercises: 
+40 / 116+
