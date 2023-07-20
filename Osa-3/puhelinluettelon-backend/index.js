@@ -15,7 +15,7 @@ let persons = [
           { 
             "id": 2,
             "name": "Ada Lovelace", 
-            "number": "39-44-5323523"
+            "number": "39-44-53235234"
           },
           { 
             "id": 3,
@@ -31,7 +31,7 @@ let persons = [
       }
   ]
 
-// luo htto-moduulin avulla web-palvelimen
+// luo http-moduulin avulla web-palvelimen
 // web-palvelimelle rekisteröidään tapahtumankäsittelijä, joka suoritetaan HTTP-pyyntöjen yhteydessä
 app.get('/', (req, res) => {
     res.send('<h1>Hello World!</h1>')
@@ -42,7 +42,9 @@ app.get('/', (req, res) => {
   })
 
   app.get('/info', (req, res) => {
-    const info = "Phonebook has info for x people"
+    const numberOfPeople = persons[0].persons.length
+    const currentTime = new Date().toString() 
+    const info = `Phonebook has info for ${numberOfPeople} people<br><br>${currentTime}` 
     res.send(info)
   })
   
