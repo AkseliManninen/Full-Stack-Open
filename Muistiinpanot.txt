@@ -62,3 +62,5 @@ a. Node.js ja expressioneita
 
 - Selaimen puolella käytetään (nykyään) ES6:n moduuleita, eli moduulit määritellään exportilla ja otetaan käyttöön importilla.
 Node.js kuitenkin käyttää ns. CommonJS-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla.
+
+- Javascriptissa yhtäsuuruusmerkki on === eli kolme kertaa =
