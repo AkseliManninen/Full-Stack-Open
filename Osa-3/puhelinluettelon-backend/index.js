@@ -5,8 +5,6 @@ const app = express()
 
 // kovakoodattu JSON-lista
 let persons = [
-    {
-        "persons":[
           { 
             "id": 1,
             "name": "Arto Hellas", 
@@ -27,8 +25,6 @@ let persons = [
             "name": "Mary Poppendieck", 
             "number": "12339-23-23122",
           }
-        ]
-      }
   ]
 
 // luo http-moduulin avulla web-palvelimen
@@ -42,10 +38,16 @@ app.get('/', (req, res) => {
   })
 
   app.get('/info', (req, res) => {
-    const numberOfPeople = persons[0].persons.length
+    const numberOfPeople = persons.length
     const currentTime = new Date().toString() 
     const info = `Phonebook has info for ${numberOfPeople} people<br><br>${currentTime}` 
     res.send(info)
+  })
+
+  app.get('/api/persons/:id', (req, res) => {
+    const id = Number(req.params.id)
+    const person = persons.find(person => person.id === id)
+    res.json(person)
   })
   
   const PORT = 3001
