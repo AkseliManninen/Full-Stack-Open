@@ -64,3 +64,4 @@ a. Node.js ja expressioneita
 Node.js kuitenkin käyttää ns. CommonJS-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla.
 
 - Javascriptissa yhtäsuuruusmerkki on === eli kolme kertaa =
+- Vastaavasti epäsuuruus on !==
