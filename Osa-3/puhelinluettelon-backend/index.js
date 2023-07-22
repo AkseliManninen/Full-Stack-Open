@@ -27,6 +27,9 @@ let persons = [
           }
   ]
 
+  // middleware, joka ottaa json-parserin käyttöön
+  app.use(express.json())
+
 // luo http-moduulin avulla web-palvelimen
 // web-palvelimelle rekisteröidään tapahtumankäsittelijä, joka suoritetaan HTTP-pyyntöjen yhteydessä
 app.get('/', (req, res) => {
@@ -44,6 +47,7 @@ app.get('/', (req, res) => {
     res.send(info)
   })
 
+  // hakee id:llä olevan puhelintiedon jos se on olemassa
   app.get('/api/persons/:id', (req, res) => {
     const id = Number(req.params.id)
     const person = persons.find(person => person.id === id)
@@ -54,12 +58,25 @@ app.get('/', (req, res) => {
     else (res.json(person))
   })
 
-  
+  // poistaa id:llä olevan puhelintiedon
   app.delete('/api/persons/:id', (req, res) => {
     const id = Number(req.params.id)
     persons = persons.filter(person => person.id !== id)
 
     res.status(204).end()
+  })
+
+  // lisää puhelintiedon
+  app.post('/api/persons/', (req, res) => {
+    // arpoo id:n
+    const id = Math.floor(Math.random() * 100000)
+
+    const person = req.body
+    person.id = id
+    persons = persons.concat(person)
+
+    console.log(person)
+    res.json(person)
   })
   
   const PORT = 3001
