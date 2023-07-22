@@ -72,11 +72,23 @@ app.get('/', (req, res) => {
     const id = Math.floor(Math.random() * 100000)
 
     const person = req.body
-    person.id = id
-    persons = persons.concat(person)
+    if (person.name === undefined || person.number === undefined) {
+        console.log("Missing information - the name and the number must be filled")
+        res.status(404).send({error: 'missing the name or the number'})
+    }
 
-    console.log(person)
-    res.json(person)
+    else if (persons.find(existingPerson => existingPerson.name === person.name)) {
+        console.log("The name is already in the list")
+        res.status(404).send({error: 'name must be unique'})
+    }
+
+    else {
+        person.id = id
+        persons = persons.concat(person)
+    
+        console.log(person)
+        res.json(person)
+    }
   })
   
   const PORT = 3001
