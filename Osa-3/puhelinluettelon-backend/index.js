@@ -61,7 +61,7 @@ app.use((req, res, next) => {
     else (res.json(person))
   })
 
-  // poistaa id:llä olevan puhelintiedon
+  // poistaa id:llä olevan puhelintiedon 
   app.delete('/api/persons/:id', (req, res) => {
     const id = Number(req.params.id)
     persons = persons.filter(person => person.id !== id)
