@@ -1,6 +1,7 @@
 // web-palvelin
 const http = require('http')
 const express = require('express')
+var morgan = require('morgan')
 const app = express()
 
 // kovakoodattu JSON-lista
@@ -29,6 +30,9 @@ let persons = [
 
   // middleware, joka ottaa json-parserin käyttöön
   app.use(express.json())
+
+  // middleware loggeri käyttöön
+  app.use(morgan('tiny'))
 
 // luo http-moduulin avulla web-palvelimen
 // web-palvelimelle rekisteröidään tapahtumankäsittelijä, joka suoritetaan HTTP-pyyntöjen yhteydessä
@@ -86,7 +90,6 @@ app.get('/', (req, res) => {
         person.id = id
         persons = persons.concat(person)
     
-        console.log(person)
         res.json(person)
     }
   })
