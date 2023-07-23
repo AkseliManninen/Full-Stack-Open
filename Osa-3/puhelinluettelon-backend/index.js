@@ -28,22 +28,21 @@ let persons = [
           }
   ]
 
-  // middleware, joka ottaa json-parserin käyttöön
-  app.use(express.json())
+// middleware, joka ottaa json-parserin käyttöön
+app.use(express.json())
 
-  // middleware loggeri käyttöön
-  app.use(morgan('tiny'))
+// middleware, joka ottaa json-parserin käyttöön
+app.use(express.json())
 
-// luo http-moduulin avulla web-palvelimen
-// web-palvelimelle rekisteröidään tapahtumankäsittelijä, joka suoritetaan HTTP-pyyntöjen yhteydessä
-app.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>')
+// uusi Morgan-token, muotoilee bodyn
+morgan.token('body', (req, res) => JSON.stringify(req.body))
+
+// loggeri, eri muotoilu post-requesteilla
+app.use((req, res, next) => {
+    if (req.method === 'POST') {morgan(':method :url :status :res[content-length] - :response-time ms :body - :req[content-length]')(req, res, next)} 
+    else {morgan('tiny')(req, res, next);}
   })
   
-  app.get('/api/persons', (req, res) => {
-    res.json(persons)
-  })
-
   app.get('/info', (req, res) => {
     const numberOfPeople = persons.length
     const currentTime = new Date().toString() 
