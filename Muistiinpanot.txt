@@ -65,3 +65,9 @@ Node.js kuitenkin käyttää ns. CommonJS-moduuleja. Syy tälle on siinä, että
 
 - Javascriptissa yhtäsuuruusmerkki on === eli kolme kertaa =
 - Vastaavasti epäsuuruus on !==
+
+- HTTP-pyyntötyyppien ominaisuudet safe ja idempotent: 
+- Safe: get tulisi olla safe, tarkoittaa että ei esim. muuta tietokannan tilaa, palauttaa vain datan
+- Idempotent: kaikkien muiden paitsi POST-pyyntöjen tulisi olla idempotent, tarkoittaa että kun suoritetaan monta kertaa, sisältö pysyy samana
+
+- Kirjastot asennetaan npm install <kirjaton nimi>
