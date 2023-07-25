@@ -71,3 +71,9 @@ Node.js kuitenkin käyttää ns. CommonJS-moduuleja. Syy tälle on siinä, että
 - Idempotent: kaikkien muiden paitsi POST-pyyntöjen tulisi olla idempotent, tarkoittaa että kun suoritetaan monta kertaa, sisältö pysyy samana
 
 - Kirjastot asennetaan npm install <kirjaton nimi>
+
+b. Sovellus internettiin
+
+- CORS eli Cross-origin resource sharing: Oletusarvoisesti websovellus saa kommunikoida vain samassa originissa olevan palvelimen kanssa
+
+- PaaS ratkaisujen ykkönen on ollut pitkään Heroku, jossa voi asentaa suoritusympäristön ja tietokanna
