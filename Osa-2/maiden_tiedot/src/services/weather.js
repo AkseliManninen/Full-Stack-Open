@@ -10,4 +10,3 @@ const getWeather = (capital) => {
 export default { 
     getWeather: getWeather, 
   }
-
