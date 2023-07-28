@@ -1,7 +1,7 @@
 import axios from 'axios'
 const baseUrl = 'https://studies.cs.helsinki.fi/restcountries/api/all'
 
-// tapahtumaläsittelijä: hakee maatiedot palvelimelta
+// tapahtumaläsittelijä: hakee yhteytiedot palvelimelta
 const getAll = () => {
   return axios.get(baseUrl)
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import countriesService from "./services/countries"
-import weatherService from "./services/weather"
 
 // komponentti: lomake jolla etsitään ja rajataan maita
 // kun lomakkeeseen kirjoitetaan tekstiä, triggeröityy props.handöeFilterInputChange, joka rajaa maalistaa syötteen mukaan
@@ -12,36 +11,7 @@ const CountryForm = (props) => (
   </div>
   );
 
-// komponentti: renderöi säätiedot
-const Weather = (props) => {
-  const [weather, setWeather] = useState(null);
-
-  useEffect(() => {
-    weatherService
-      .getWeather(props.country.capital)
-      .then((response) => {
-        setWeather(response.data);
-        console.log(response.data)
-      })
-      .catch((error) => {
-        console.log('Error:', error);
-      });
-  }, []);
-
-  return (
-    <div>
-      <h2>Weather in {props.country.capital}</h2>
-      {weather && (
-        <div>
-          <p>temperature {(weather.main.temp -273.15).toFixed(2)} Celsius</p>
-          <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`} alt=""/>
-          <p>wind {weather.wind.speed} m/s</p>
-        </div>
-      )}
-    </div>
-  );
-};
-
+// 
 
 // komponentti: renderöi maat
 const Countries = (props) => { 
@@ -68,14 +38,13 @@ const Countries = (props) => {
         <br />
         area {country.area}
       </p>
-      <h3>languages:</h3>
+      <h2>languages:</h2>
       <ul>
         {Object.keys(country.languages).map((abbreviation) => (
           <li key={abbreviation}>{country.languages[abbreviation]}</li>
         ))}
       </ul>
       <img src={country.flags.png} alt={country.flags.alt} />
-      <Weather country = {country}/>
     </div>
     )
   }
