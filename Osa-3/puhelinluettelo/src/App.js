@@ -1,4 +1,4 @@
- 
+import { useEffect, useState } from 'react'
 import personsService from "./services/persons"
 import './index.css'
 
@@ -70,7 +70,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filterName, setNewFilterName] = useState('')
   const [show, setShow] = useState(persons)
-  const [successMessage, setSuccessMessage] = useState('')
+  const [successMessage, setSuccessMessage] = useState(null)
 
   // effect hook: hakee persons-tiedot db.json-dokumentista
   useEffect(() => {
