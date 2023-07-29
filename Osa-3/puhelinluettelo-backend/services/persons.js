@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://render-test-uplh.onrender.com/api/persons'
+const baseUrl = 'api/persons'
 
 // tapahtumaläsittelijä: hakee yhteytiedot palvelimelta
 const getAll = () => {
