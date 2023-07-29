@@ -28,17 +28,23 @@ app.use((req, res, next) => {
     else {morgan('tiny')(req, res, next);}
   })
 
-app.get('/api/persons', (req, res) => {
-  Person.find({}).then(person => {
-    res.json(person)
+app.get('/api/persons', (req, res, next) => {
+  Person.find({})
+  .then(person => {
+    if (person) {
+      res.json(person)
+    } else {
+      response.status(404).end()
+    }
   })
+  .catch(error => next(error))
 })
 
-app.get('/info', (req, res) => {
-const numberOfPeople = persons.length
-const currentTime = new Date().toString() 
-const info = `Phonebook has info for ${numberOfPeople} people<br><br>${currentTime}` 
-res.send(info)
+app.get('/info', (req, res, next) => {
+  const numberOfPeople = persons.length
+  const currentTime = new Date().toString() 
+  const info = `Phonebook has info for ${numberOfPeople} people<br><br>${currentTime}` 
+  res.send(info)
 })
 
 // poistaa id:llä olevan puhelintiedon 
@@ -79,15 +85,39 @@ else {
 
 // hakee id:llä olevan puhelintiedon jos se on olemassa
 app.get('/api/persons/:id', (req, res) => {
-  Person.findById(req.params.id).then(person => {
-    console.log(person)
-    if (person === undefined) {
-      console.klog("person not found with the given id")
-      res.status(404).end()
-  }
-   else (res.json(person))
-  })
+  Person.findById(req.params.id)
+    .then(person => {
+      if (person) {
+        res.json(person)
+      } else {
+        res.status(404).end()
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).end()
+    })
 })
+
+const unknownEndpoint = (req, res) => {
+  res.status(404).send({ error: 'unknown endpoint' })
+}
+
+// olemattomien osoitteiden käsittely
+app.use(unknownEndpoint)
+
+const errorHandler = (error, req, res, next) => {
+  console.error(error.message)
+
+  if (error.name === 'CastError') {
+    return res.status(400).send({ error: 'malformatted id' })
+  }
+
+  next(error)
+}
+
+// tämä tulee kaikkien muiden middlewarejen rekisteröinnin jälkeen!
+app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
