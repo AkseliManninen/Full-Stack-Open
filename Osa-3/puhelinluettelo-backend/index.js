@@ -41,10 +41,12 @@ app.get('/api/persons', (req, res, next) => {
 })
 
 app.get('/info', (req, res, next) => {
-  const numberOfPeople = persons.length
-  const currentTime = new Date().toString() 
-  const info = `Phonebook has info for ${numberOfPeople} people<br><br>${currentTime}` 
-  res.send(info)
+  Person.countDocuments({})
+    .then(numberOfPeople => {
+      const currentTime = new Date().toString()
+      const info = `Phonebook has info for ${numberOfPeople} people<br><br>${currentTime}`
+      res.send(info)
+    })
 })
 
 // poistaa id:llä olevan puhelintiedon 
