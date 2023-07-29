@@ -66,11 +66,6 @@ if (personInformation.name === undefined || personInformation.number === undefin
     return res.status(400).json({ error: "Missing information - the name and the number must be filled" })
 }
 
-//else if (persons.find(existingPerson => existingPerson.name === person.name)) {
-//    console.log("The name is already in the list")
-//    res.status(404).send({error: 'name must be unique'})
-//}
-
 else {
   const person = new Person({
     name: req.body.name,
@@ -81,6 +76,27 @@ else {
     console.log(`added ${req.body.name} number ${req.body.number} to phonebook`)
     })    
 }
+})
+
+app.put('/api/persons/:id', (req, res, next) => {
+  const id = req.params.id;
+  const number = req.body.number;
+
+  if (!number) {
+    return res.status(400).json({ error: 'Missing number in request body' });
+  }
+
+  // Corrected: Pass an object with the 'number' field to be updated
+  Person.findByIdAndUpdate(id, { number }, { new: true })
+    .then(updatedPerson => {
+      if (updatedPerson) {
+        res.json(updatedPerson)
+        console.log(`Updated phone number for ${updatedPerson.name} to ${number}`)
+      } else {
+        res.status(404).json({ error: 'Person not found' })
+      }
+    })
+    .catch(error => next(error))
 })
 
 // hakee id:llä olevan puhelintiedon jos se on olemassa
