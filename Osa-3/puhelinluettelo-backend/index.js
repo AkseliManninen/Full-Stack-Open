@@ -52,14 +52,20 @@ app.use((req, res, next) => {
     else {morgan('tiny')(req, res, next);}
   })
 
+
+app.get('/api/persons', (req, res) => {
+  Person.find({}).then(person => {
+    res.json(person)
+  })
+})
+
+
 app.get('/info', (req, res) => {
 const numberOfPeople = persons.length
 const currentTime = new Date().toString() 
 const info = `Phonebook has info for ${numberOfPeople} people<br><br>${currentTime}` 
 res.send(info)
 })
-
-
 
 // poistaa id:llä olevan puhelintiedon 
 app.delete('/api/persons/:id', (req, res) => {
@@ -78,6 +84,11 @@ if (person.name === undefined || person.number === undefined) {
     console.log("Missing information - the name and the number must be filled")
     return response.status(400).json({ error: "Missing information - the name and the number must be filled" })
 }
+
+//else if (persons.find(existingPerson => existingPerson.name === person.name)) {
+//    console.log("The name is already in the list")
+//    res.status(404).send({error: 'name must be unique'})
+//}
 
 else {
   const person = new Person({
@@ -103,34 +114,7 @@ app.get('/api/persons/:id', (req, res) => {
   })
 })
 
-//else if (persons.find(existingPerson => existingPerson.name === person.name)) {
-//    console.log("The name is already in the list")
-//    res.status(404).send({error: 'name must be unique'})
-//}
-
 const PORT = process.env.PORT
 app.listen(PORT, () => {
 console.log(`Server running on port ${PORT}`)
 })
-
-// mondo-db
-if (process.argv.length > 2) {
-  const personName = process.argv[3]
-  const personNumber = process.argv[4]
-  const person = new Person({
-      name: personName,
-      number: personNumber,
-    })
-    
-  person.save().then(result => {
-  console.log(`added ${personName} number ${personNumber} to phonebook`)
-  mongoose.connection.close()
-  })
-}
-if (process.argv.length === 2) {
-  app.get('/api/persons', (request, response) => {
-    Person.find({}).then(person => {
-      response.json(person)
-    })
-  })
-}
