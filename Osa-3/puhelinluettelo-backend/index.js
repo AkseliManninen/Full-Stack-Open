@@ -7,30 +7,6 @@ const app = express()
 const cors = require('cors')
 const Person = require('./models/person')
 
-// kovakoodattu JSON-lista
-let persons = [
-          { 
-            "id": 1,
-            "name": "Arto Hellas", 
-            "number": "040-123456"
-          },
-          { 
-            "id": 2,
-            "name": "Ada Lovelace", 
-            "number": "39-44-53235234"
-          },
-          { 
-            "id": 3,
-            "name": "Dan Abramov", 
-            "number": "12-43-234345",
-          },
-          { 
-            "id": 4,
-            "name": "Mary Poppendieck", 
-            "number": "12339-23-23122",
-          }
-  ]
-
 // middleware, joka ottaa json-parserin käyttöön
 app.use(express.json())
 
@@ -78,11 +54,11 @@ res.status(204).end()
 // lisää puhelintiedon
 app.post('/api/persons/', (req, res) => {
 
-  const person = req.body
+  const personInformation = req.body
 
-if (person.name === undefined || person.number === undefined) {
+if (personInformation.name === undefined || personInformation.number === undefined) {
     console.log("Missing information - the name and the number must be filled")
-    return response.status(400).json({ error: "Missing information - the name and the number must be filled" })
+    return res.status(400).json({ error: "Missing information - the name and the number must be filled" })
 }
 
 //else if (persons.find(existingPerson => existingPerson.name === person.name)) {
@@ -92,11 +68,11 @@ if (person.name === undefined || person.number === undefined) {
 
 else {
   const person = new Person({
-    name: body.name,
-    number: body.nuber,
+    name: req.body.name,
+    number: req.body.number,
   })
   person.save().then(savedPerson => {
-    response.json(savedPerson)
+    res.json(savedPerson)
     console.log(`added ${body.name} number ${body.number} to phonebook`)
     })    
 }
