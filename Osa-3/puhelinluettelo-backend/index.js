@@ -59,16 +59,7 @@ const info = `Phonebook has info for ${numberOfPeople} people<br><br>${currentTi
 res.send(info)
 })
 
-// hakee id:llä olevan puhelintiedon jos se on olemassa
-app.get('/api/persons/:id', (req, res) => {
-const id = Number(req.params.id)
-const person = persons.find(person => person.id === id)
-console.log(person)
-if (person === undefined) {
-    res.status(404).end()
-}
-else (res.json(person))
-})
+
 
 // poistaa id:llä olevan puhelintiedon 
 app.delete('/api/persons/:id', (req, res) => {
@@ -80,27 +71,42 @@ res.status(204).end()
 
 // lisää puhelintiedon
 app.post('/api/persons/', (req, res) => {
-// arpoo id:n
-const id = Math.floor(Math.random() * 100000)
 
-const person = req.body
+  const person = req.body
+
 if (person.name === undefined || person.number === undefined) {
     console.log("Missing information - the name and the number must be filled")
-    res.status(404).send({error: 'missing the name or the number'})
-}
-
-else if (persons.find(existingPerson => existingPerson.name === person.name)) {
-    console.log("The name is already in the list")
-    res.status(404).send({error: 'name must be unique'})
+    return response.status(400).json({ error: "Missing information - the name and the number must be filled" })
 }
 
 else {
-    person.id = id
-    persons = persons.concat(person)
-
-    res.json(person)
+  const person = new Person({
+    name: body.name,
+    number: body.nuber,
+  })
+  person.save().then(savedPerson => {
+    response.json(savedPerson)
+    console.log(`added ${body.name} number ${body.number} to phonebook`)
+    })    
 }
 })
+
+// hakee id:llä olevan puhelintiedon jos se on olemassa
+app.get('/api/persons/:id', (req, res) => {
+  Person.findById(req.params.id).then(person => {
+    console.log(person)
+    if (person === undefined) {
+      console.klog("person not found with the given id")
+      res.status(404).end()
+  }
+   else (res.json(person))
+  })
+})
+
+//else if (persons.find(existingPerson => existingPerson.name === person.name)) {
+//    console.log("The name is already in the list")
+//    res.status(404).send({error: 'name must be unique'})
+//}
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
@@ -121,7 +127,7 @@ if (process.argv.length > 2) {
   mongoose.connection.close()
   })
 }
-else if (process.argv.length === 2) {
+if (process.argv.length === 2) {
   app.get('/api/persons', (request, response) => {
     Person.find({}).then(person => {
       response.json(person)
