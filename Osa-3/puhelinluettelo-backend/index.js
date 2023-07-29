@@ -38,6 +38,9 @@ app.use(cors())
 // middleware, joka ottaa json-parserin käyttöön
 app.use(express.json())
 
+// middleware, joka mahdollistaa Expressin näyttämään staattista sisältöä
+app.use(express.static('build'))
+
 // uusi Morgan-token, muotoilee bodyn
 morgan.token('body', (req, res) => JSON.stringify(req.body))
 
