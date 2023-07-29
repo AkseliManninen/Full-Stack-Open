@@ -28,13 +28,11 @@ app.use((req, res, next) => {
     else {morgan('tiny')(req, res, next);}
   })
 
-
 app.get('/api/persons', (req, res) => {
   Person.find({}).then(person => {
     res.json(person)
   })
 })
-
 
 app.get('/info', (req, res) => {
 const numberOfPeople = persons.length
@@ -73,7 +71,7 @@ else {
   })
   person.save().then(savedPerson => {
     res.json(savedPerson)
-    console.log(`added ${body.name} number ${body.number} to phonebook`)
+    console.log(`added ${req.body.name} number ${req.body.number} to phonebook`)
     })    
 }
 })
