@@ -1,9 +1,11 @@
 // web-palvelin
 const http = require('http')
+require('dotenv').config()
 const express = require('express')
 var morgan = require('morgan')
 const app = express()
 const cors = require('cors')
+const Person = require('./models/person')
 
 // kovakoodattu JSON-lista
 let persons = [
@@ -49,10 +51,6 @@ app.use((req, res, next) => {
     if (req.method === 'POST') {morgan(':method :url :status :res[content-length] - :response-time ms :body - :req[content-length]')(req, res, next)} 
     else {morgan('tiny')(req, res, next);}
   })
-
-app.get('/api/persons', (req, res) => {
-res.json(persons)
-})
 
 app.get('/info', (req, res) => {
 const numberOfPeople = persons.length
@@ -104,7 +102,29 @@ else {
 }
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
 console.log(`Server running on port ${PORT}`)
 })
+
+// mondo-db
+if (process.argv.length > 2) {
+  const personName = process.argv[3]
+  const personNumber = process.argv[4]
+  const person = new Person({
+      name: personName,
+      number: personNumber,
+    })
+    
+  person.save().then(result => {
+  console.log(`added ${personName} number ${personNumber} to phonebook`)
+  mongoose.connection.close()
+  })
+}
+else if (process.argv.length === 2) {
+  app.get('/api/persons', (request, response) => {
+    Person.find({}).then(person => {
+      response.json(person)
+    })
+  })
+}
