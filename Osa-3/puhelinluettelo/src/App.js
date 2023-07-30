@@ -50,14 +50,16 @@ const Persons= (props) => (
   )
 
 // komponentti: antaa ilmoituksen
-const Notification = ({ message }) => {
+const Notification = ({ message, type}) => {
   if (message === null) {
     return null
   }
 
+  const className = type === "success" ? "success" : "error"
+
   return (
     // luokka: divissä annettu success-luokka tyylien lisäämistä varten
-    <div className="success"> 
+    <div className={className}> 
       {message}
     </div>
   )
@@ -71,6 +73,7 @@ const App = () => {
   const [filterName, setNewFilterName] = useState('')
   const [show, setShow] = useState(persons)
   const [successMessage, setSuccessMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   // effect hook: hakee persons-tiedot db.json-dokumentista
   useEffect(() => {
@@ -123,7 +126,13 @@ const App = () => {
           setTimeout(() => {
             setSuccessMessage(null)
           }, 5000)
-      })
+        })
+        .catch((error) => {
+          setErrorMessage(error.response.data.error)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+        })
       setNewName("")
       setNewNumber("")
         }
@@ -192,7 +201,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={successMessage} />
+      <Notification message={successMessage} type ="success"/>
+      <Notification message={errorMessage} type ="error"/>
       <Filter filterName={filterName} handleFilterChange={handleFilterChange}/>
       <PersonForm addPerson={addPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
       <Persons persons = {show} handleDeletePerson={handleDeletePerson}/>
