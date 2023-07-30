@@ -59,25 +59,21 @@ app.delete('/api/persons/:id', (req, res, next) => {
 })
 
 // lisää puhelintiedon
-app.post('/api/persons/', (req, res) => {
+app.post('/api/persons/', (req, res, next) => {
 
   const personInformation = req.body
 
-if (personInformation.name === undefined || personInformation.number === undefined) {
-    console.log("Missing information - the name and the number must be filled")
-    return res.status(400).json({ error: "Missing information - the name and the number must be filled" })
-}
-
-else {
   const person = new Person({
     name: req.body.name,
     number: req.body.number,
   })
-  person.save().then(savedPerson => {
-    res.json(savedPerson)
-    console.log(`added ${req.body.name} number ${req.body.number} to phonebook`)
-    })    
-}
+
+  person.save()
+    .then(savedPerson => {
+      res.json(savedPerson)
+      console.log(`added ${req.body.name} number ${req.body.number} to phonebook`)
+    })
+    .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (req, res, next) => {
@@ -129,6 +125,8 @@ const errorHandler = (error, req, res, next) => {
 
   if (error.name === 'CastError') {
     return res.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
   }
 
   next(error)
