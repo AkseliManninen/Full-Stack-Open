@@ -77,3 +77,11 @@ b. Sovellus internettiin
 - CORS eli Cross-origin resource sharing: Oletusarvoisesti websovellus saa kommunikoida vain samassa originissa olevan palvelimen kanssa
 
 - PaaS ratkaisujen ykkönen on ollut pitkään Heroku, jossa voi asentaa suoritusympäristön ja tietokanna
+
+c. Tietojen tallentaminen MongoDB-tietokantaan
+
+- Middlewaret suoritetaan siinä järjestyksessä, kun ne on otettu käyttöön app.use()-komentoa käyttäen
+
+d. Validointi ja ESLint
+
+- Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.
