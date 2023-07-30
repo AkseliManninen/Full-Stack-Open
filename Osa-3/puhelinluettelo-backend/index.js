@@ -85,7 +85,7 @@ app.put('/api/persons/:id', (req, res, next) => {
   }
 
   // Corrected: Pass an object with the 'number' field to be updated
-  Person.findByIdAndUpdate(id, { number }, { new: true })
+  Person.findByIdAndUpdate(id, { number }, { new: true, runValidators: true, context: 'query' })
     .then(updatedPerson => {
       if (updatedPerson) {
         res.json(updatedPerson)
