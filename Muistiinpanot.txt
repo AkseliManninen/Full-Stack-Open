@@ -1,5 +1,10 @@
 Muistiinpanot:
 
+Kurssilla opittu stäkki:
+- Frotnedn: React
+- Backend: Node.js v18.13.02
+- Tietokanta: MongoDB
+
 Osa-1:
 
 a. Reactin alkeet
@@ -85,3 +90,31 @@ c. Tietojen tallentaminen MongoDB-tietokantaan
 d. Validointi ja ESLint
 
 - Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.
+
+- Lint voidaan ajaa npm run lint
+
+- Jos haluaa korjata virheet tiedostossa, niin npm run lint -- --fix <file name>
+
+- Tiedostojen ajaminen: Frontend npm start, backend node index.js
+
+Osa-4
+
+a. Sovelluksen rakenne ja testauksen alkeet
+
+- Kyse on backendistä, joten projekti aloitettiin npm init -komennolla
+- Tarvitsi asentaa seuraavat middleware npm install cors, mongoose, express, http, dotenv
+- npm install --save-dev nodemon auttaa siinä, että ohjelma käynnistyy sulavammin
+- applikaation saa yhdistettyä tietokantaan laittamalla, npm start <salasana>
+
+- Testauskirjaston Jest asennus: npm install --save-dev jest
+
+- Yksittäisiä testejä on mahdollista suorittaa only, tai npm test -- -t <"test description"> tavoilla
+
+- Testitidoston tulee loppua .test.js
+
+Sanastoa:
+
+- Middleware
+- Moduuli
+- Skeema: 
+- Metodi:
