@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const config = require('./utils/config')
 
 const blogSchema = mongoose.Schema({
   title: String,
@@ -9,9 +10,6 @@ const blogSchema = mongoose.Schema({
 
 const Blog = mongoose.model('Blog', blogSchema)
 
-const password = process.argv[2]
-
-const mongoUrl = `mongodb+srv://akselimanninen:${password}@cluster0.ma1cb9q.mongodb.net/bloglist?retryWrites=true&w=majority`
-mongoose.connect(mongoUrl)
+mongoose.connect(config.MONGODB_URI)
 
 module.exports = Blog
