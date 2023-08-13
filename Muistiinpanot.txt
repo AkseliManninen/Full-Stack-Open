@@ -112,6 +112,8 @@ a. Sovelluksen rakenne ja testauksen alkeet
 
 - Testitidoston tulee loppua .test.js
 
+- Testit voi ajaa komennolla npm test, jos on laittanut package.json tiedostoo "test": "jest --verbose",
+
 Sanastoa:
 
 - Middleware
