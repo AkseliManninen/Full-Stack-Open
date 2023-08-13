@@ -139,5 +139,17 @@ describe("the favorite blog", () => {
       __v: 0
     })
   })
+
+describe("mostBlogs", () => {
+  test("gives null when there are no blog", () => {
+    const result = listHelper.mostBlogs([])
+    expect(result).toBe(null)
+  })
+
+  test("gives the author with the most blogs", () => {
+    const result = listHelper.mostBlogs(blogs);
+    expect(result).toEqual({author: "Robert C. Martin", blogs: 3})
+  })
+})
   
 })
