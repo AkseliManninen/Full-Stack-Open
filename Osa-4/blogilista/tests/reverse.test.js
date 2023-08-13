@@ -151,5 +151,17 @@ describe("mostBlogs", () => {
     expect(result).toEqual({author: "Robert C. Martin", blogs: 3})
   })
 })
+
+describe("mostLikes", () => {
+  test("give null when there are no blogs", () => {
+    const result = listHelper.mostLikes([])
+    expect(result).toBe(null)
+  });
+
+  test("returns the author with the most likes", () => {
+    const result = listHelper.mostLikes(blogs)
+    expect(result).toEqual({ author: "Edsger W. Dijkstra", likes: 17 })
+  })
+})
   
 })
