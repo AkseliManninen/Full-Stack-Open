@@ -114,6 +114,9 @@ a. Sovelluksen rakenne ja testauksen alkeet
 
 - Testit voi ajaa komennolla npm test, jos on laittanut package.json tiedostoo "test": "jest --verbose",
 
+b. Backendin testaaminen
+Async- ja await ovat ES7:n mukanaan tuoma uusi syntaksi, joka mahdollistaa promisen palauttavien asynkronisten funktioiden kutsumisen siten, että kirjoitettava koodi näyttää synkroniselta.
+
 Sanastoa:
 
 - Middleware
