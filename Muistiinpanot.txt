@@ -115,7 +115,12 @@ a. Sovelluksen rakenne ja testauksen alkeet
 - Testit voi ajaa komennolla npm test, jos on laittanut package.json tiedostoo "test": "jest --verbose",
 
 b. Backendin testaaminen
-Async- ja await ovat ES7:n mukanaan tuoma uusi syntaksi, joka mahdollistaa promisen palauttavien asynkronisten funktioiden kutsumisen siten, että kirjoitettava koodi näyttää synkroniselta.
+- Async- ja await ovat ES7:n mukanaan tuoma uusi syntaksi, joka mahdollistaa promisen palauttavien asynkronisten funktioiden kutsumisen siten, että kirjoitettava koodi näyttää synkroniselta.
+- Awaitin käyttö onnistuu ainoastaan jos ollaan async-funktiossa.
+- Synkroninen tarkoittaa, että prosessi suoritetaan järjestyksessä. Asyknroninen että voidaan thedä samaan aikaan.
+- Testeissä --runInBand estää testien samanaikaisen suorittamisen
+- Asenna cross-env suorituksen aikaiseksi riippuvuudeksi npm install --save-dev cross-env
+- npm install --save-dev supertest, SuperTest on toinen (APIn) testikirjasto Jestin ohella
 
 Sanastoa:
 
