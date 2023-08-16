@@ -17,6 +17,15 @@ test('there are three blogs', async () => {
   expect(response.body).toHaveLength(3)
 })
 
+test('identification field is id', async () => {
+  const response = await api
+    .get('/api/blogs')
+  
+  response.body.forEach(blog => {
+    expect(blog.id).toBeDefined()
+  })
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
