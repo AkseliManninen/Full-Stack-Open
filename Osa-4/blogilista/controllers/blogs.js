@@ -10,6 +10,10 @@ blogsRouter.get('/', (request, response) => {
 blogsRouter.post('/', (request, response, next) => {
   const body = request.body
 
+  if (!body.title || !body.url) {
+    return response.status(400).json({error: "Title and url are required"})
+  }
+  
   if (!body.likes) {
     body.likes = 0
   }

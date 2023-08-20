@@ -97,6 +97,31 @@ test('default likes is 0 if likes are not defined', async () => {
   expect(response.body.likes).toBe(0)
 })
 
+test('title must be defined', async () => {
+  const newBlog = {
+    "author": "Test author",
+    "url": "test.fi"
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+})
+
+test('url must be defined', async () => {
+  const newBlog = {
+    "title": "Title",
+    "author": "Test author",
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+})
+
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
