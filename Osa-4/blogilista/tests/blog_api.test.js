@@ -122,6 +122,29 @@ test('url must be defined', async () => {
 })
 
 
+test('deleting a blog', async () => {
+  const newBlog = new Blog({
+    title: 'Test delete a blog',
+    author: 'Test Author',
+    url: 'test.fi',
+    likes: 0,
+  });
+  const savedBlog = await newBlog.save()
+
+  await api
+    .delete(`/api/blogs/${savedBlog.id}`)
+    .expect(204)
+
+    const deletedBlog = await Blog.findById(savedBlog.id);
+    expect(deletedBlog).toBeNull()
+})
+
+test('deleting a blog with an id that does not exists returns 404', async () => {
+  await api
+    .delete('/api/blogs/123212321')
+    .expect(404)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
