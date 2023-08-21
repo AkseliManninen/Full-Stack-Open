@@ -145,6 +145,25 @@ test('deleting a blog with an id that does not exists returns 404', async () => 
     .expect(404)
 })
 
+test('updating likes of a blog', async () => {
+  const blogs = await api.get('/api/blogs')
+  const firstBlog= blogs.body[0]
+  const updatedLikes = 100
+
+  const updatedBlog = { ...firstBlog, likes: updatedLikes }
+
+  await api
+    .put(`/api/blogs/${firstBlog.id}`)
+    .send(updatedBlog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAfterUpdate = await api.get('/api/blogs')
+  const updatedBlogAfterUpdate = blogsAfterUpdate.body.find(blog => blog.id === firstBlog.id)
+
+  expect(updatedBlogAfterUpdate.likes).toBe(100)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
