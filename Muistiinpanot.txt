@@ -122,6 +122,10 @@ b. Backendin testaaminen
 - Asenna cross-env suorituksen aikaiseksi riippuvuudeksi npm install --save-dev cross-env
 - npm install --save-dev supertest, SuperTest on toinen (APIn) testikirjasto Jestin ohella
 
+c. Käyttäjienhallinta
+- MondoDB on dokumenttitietokanta
+- Skeemaa ei tarvitse määritellä kuin relaatiotiotokannassa: Viiteavaimet voivat olla käyttäjien ja muistiinpanojen tapauksissa kummassa tahansa "taulussa" tai molemmissa.
+
 Sanastoa:
 
 - Middleware
