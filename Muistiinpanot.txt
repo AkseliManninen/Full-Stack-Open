@@ -125,6 +125,7 @@ b. Backendin testaaminen
 c. Käyttäjienhallinta
 - MondoDB on dokumenttitietokanta
 - Skeemaa ei tarvitse määritellä kuin relaatiotiotokannassa: Viiteavaimet voivat olla käyttäjien ja muistiinpanojen tapauksissa kummassa tahansa "taulussa" tai molemmissa.
+- mongoose-unique-validatorilla voi tarkistaa, onko kentän arvo uniikki
 
 Sanastoa:
 
@@ -132,3 +133,4 @@ Sanastoa:
 - Moduuli
 - Skeema: 
 - Metodi:
+
