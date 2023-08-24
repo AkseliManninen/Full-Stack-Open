@@ -5,6 +5,10 @@ const User = require('../models/user')
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body
 
+  if (!name|| !username) {
+    return response.status(400).json({error: "Define name and username"})
+  }
+
   if (!password || password.length < 3) {
     response.status(400).json({ error: 'Password must be filled and at least 3 characters' })
   }
