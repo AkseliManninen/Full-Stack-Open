@@ -1,9 +1,9 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RBIiwiaWQiOiI2NGVjMmUwMTcwMDQ5ZGFjMzQ4Njk2NTciLCJpYXQiOjE2OTMzMzI5NTB9.lb1a9uWL6JNuw351VH3_5ALAUpKmaimnljrjQCJnvWQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RBIiwiaWQiOiI2NGVjMmUwMTcwMDQ5ZGFjMzQ4Njk2NTciLCJpYXQiOjE2OTMzMzcwMjZ9.Wvf38Ael3Rj0s4k0djPqq1EWLOYv44GtzlN9SKthq30
 
 {
-    "title": "TA12 blog",
+    "title": "TA21 blog",
     "author": "TestA",
     "url": "myblog.fi",
     "likes": 1,
