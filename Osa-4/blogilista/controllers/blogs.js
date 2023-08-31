@@ -42,18 +42,6 @@ blogsRouter.post('/', async (request, response, next) => {
 blogsRouter.delete('/:id', async (request, response, next) => {
   try {
     const id = request.params.id
-    const deletedBlog = await Blog.findByIdAndRemove(id)
-
-    response.status(204).end()
-  } catch (error) {
-    response.status(404).json({ error: 'Id not found' })
-    next(error)
-  }
-})
-
-blogsRouter.delete('/:id', async (request, response, next) => {
-  try {
-    const id = request.params.id
     const decodedToken = jwt.verify(request.token, process.env.SECRET)
 
     if (!decodedToken.id) {
@@ -66,7 +54,7 @@ blogsRouter.delete('/:id', async (request, response, next) => {
       return response.status(404).json({ error: 'Id not found' })
     }
 
-    if (blogToDelete.user.toString() !== decodedToken.id) {
+    if (deletedBlog.user.toString() !== decodedToken.id) {
       return response.status(403).json({ error: 'Only the creator can delete the blog' })
     }
 
