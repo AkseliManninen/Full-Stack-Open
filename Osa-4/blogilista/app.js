@@ -5,11 +5,13 @@ const config = require('./utils/config')
 const blogsRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
-const middleware = require('./controllers/middleware')
+const middleware = require('./utils/middleware')
 
 const app = express()
 
 app.use(middleware.tokenExtractor)
+
+app.use(middleware.errorHandler)
 
 app.use(cors())
 
