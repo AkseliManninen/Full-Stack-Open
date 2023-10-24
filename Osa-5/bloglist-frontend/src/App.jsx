@@ -14,7 +14,7 @@ const App = () => {
     )  
   }, [])
 
-  if (user === null) {
+  if (1 === null) {
     return (
       <div>
         <h2>Log in to application</h2>
