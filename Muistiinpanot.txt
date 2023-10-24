@@ -127,6 +127,13 @@ c. Käyttäjienhallinta
 - Skeemaa ei tarvitse määritellä kuin relaatiotiotokannassa: Viiteavaimet voivat olla käyttäjien ja muistiinpanojen tapauksissa kummassa tahansa "taulussa" tai molemmissa.
 - mongoose-unique-validatorilla voi tarkistaa, onko kentän arvo uniikki
 
+Osa-5
+
+a. Kirjautuminen frontendissa
+
+- Git-konfiguraation poistaminen: rm -fr .git
+- Viten käynnistys portissa 3003: npm start -- --port 3003 
+
 Sanastoa:
 
 - Middleware
