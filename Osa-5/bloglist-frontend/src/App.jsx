@@ -19,7 +19,15 @@ const App = () => {
       <div>
         <h2>Log in to application</h2>
         <form>
-          //...
+          <div>
+            username <input/>
+          </div>
+          <div>
+            password <input/>
+          </div>
+          <div>
+          <button type="submit">login</button>
+        </div>
         </form>
       </div>
     )
