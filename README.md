@@ -8,7 +8,7 @@ Osa-2 read 5/5, exercises 19/20 (skipped 2.17*) 🟢
 
 Osa-3 exercises read 4/4, exercises 22/22 🟢
 
-Osa-4 exercises read 4/4, 21/23 🟡
+Osa-4 exercises read 4/4, 21/23 🟢
 
 Osa-5 exercises 0/23 🔴
 
