@@ -14,16 +14,46 @@ const App = () => {
     )  
   }, [])
 
-  if (1 === null) {
+  const handleLogin = async (event) => {
+    event.preventDefault()
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        setUser(data)
+        setUsername('')
+        setPassword('')
+
+      } else {
+        console.error('Login failed:')
+      }
+    } catch (exception) {
+      console.error('Network error:', exception)
+    }
+  }
+
+  if (user === null) {
     return (
       <div>
         <h2>Log in to application</h2>
-        <form>
+        <form onSubmit = {handleLogin}>
           <div>
-            username <input/>
+            username <input
+                      value={username}
+                      onChange={(event) => setUsername(event.target.value)}/>
           </div>
           <div>
-            password <input/>
+            password <input 
+                      value = {password} 
+                      onChange = {(event) => setPassword(event.target.value)}/>
           </div>
           <div>
           <button type="submit">login</button>
@@ -36,6 +66,8 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
+      <p>{user.name} logged in</p>
+
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
