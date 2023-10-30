@@ -7,6 +7,9 @@ const App = () => {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null) 
+  const [newBlogTitle, setNewBlogTitle] = useState('');
+  const [newBlogAuthor, setNewBlogAuthor] = useState('');
+  const [newBlogURL, setNewBlogURL] = useState('');
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -53,6 +56,39 @@ const App = () => {
     }
   }
 
+  // Lisää uuden blogin
+  const handleAddBlog = async (event) => {
+    event.preventDefault()
+  
+    const newBlog = {
+      title: newBlogTitle,
+      author: newBlogAuthor,
+      url: newBlogURL,
+      likes: 0, 
+    };
+  
+    try {
+      const response = await fetch('/api/blogs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(newBlog), 
+      });
+  
+      if (response.ok) {
+        console.log('Blog created');
+      } 
+      
+      else {
+        console.error('Error:', response.status);
+      }
+    } catch (exception) {
+      console.error('Error', exception);
+    }
+  };
+
   const handleResetToken = () => {
     localStorage.removeItem('token')
     console.log('Removing token')
@@ -87,7 +123,19 @@ const App = () => {
       <p>{user.name} logged in
       <button onClick={handleResetToken}>logout</button>
       </p>
-
+      <h2>create new</h2>
+      <form onSubmit={handleAddBlog}>
+        <div>
+        title: <input value={newBlogTitle} onChange={(event) => setNewBlogTitle(event.target.value)} />
+        </div>
+        <div>
+          author: <input value={newBlogAuthor} onChange={(event) => setNewBlogAuthor(event.target.value)} />
+        </div>
+        <div>
+          url: <input value={newBlogURL} onChange={(event) => setNewBlogURL(event.target.value)} />
+        </div>
+        <button type="submit">create</button>
+      </form>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
