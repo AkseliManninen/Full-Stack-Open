@@ -11,7 +11,20 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
+
+    // Tarkistaa, jos local storagessa on jo token käyttäjälle
+    const storedToken = localStorage.getItem('token')
+    const storedName = localStorage.getItem('name');
+
+    if (storedToken) {
+      console.log(storedToken)
+      setUser({ token: storedToken, name: storedName})
+    }
+    else {
+      console.log('No token found')
+      setUser(null)
+    }
   }, [])
 
   const handleLogin = async (event) => {
@@ -29,15 +42,20 @@ const App = () => {
       if (response.ok) {
         const data = await response.json()
         setUser(data)
-        setUsername('')
-        setPassword('')
 
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('name', data.name)
       } else {
         console.error('Login failed:')
       }
     } catch (exception) {
       console.error('Network error:', exception)
     }
+  }
+
+  const handleResetToken = () => {
+    localStorage.removeItem('token')
+    console.log('Removing token')
   }
 
   if (user === null) {
@@ -66,7 +84,9 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      <p>{user.name} logged in</p>
+      <p>{user.name} logged in
+      <button onClick={handleResetToken}>logout</button>
+      </p>
 
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
