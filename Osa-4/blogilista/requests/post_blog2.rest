@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RCIiwiaWQiOiI2NGYwMzAwMzVhODVmNDQyM2E3M2FiYTQiLCJpYXQiOjE2OTM0NjI1NDF9.KCFM1pW2mBzWWOyNLtZhp38cLlwhWeiHUp2mx4eI-HM
+
+{
+    "title": "TA42 blog",
+    "author": "TestA",
+    "url": "myblog.fi",
+    "likes": 1,
+    "userId": "64ec2e0170049dac34869657"
+}
