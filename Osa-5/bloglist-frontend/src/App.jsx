@@ -10,6 +10,8 @@ const App = () => {
   const [newBlogTitle, setNewBlogTitle] = useState('');
   const [newBlogAuthor, setNewBlogAuthor] = useState('');
   const [newBlogURL, setNewBlogURL] = useState('');
+  const [successMessage, setSuccessMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -94,10 +96,27 @@ const App = () => {
     console.log('Removing token')
   }
 
+  // komponentti: antaa ilmoituksen
+  const Notification = ({ message, type}) => {
+    if (message === null) {
+      return null
+    }
+
+    const className = type === "success" ? "success" : "error"
+
+    return (
+      // luokka: divissä annettu success-luokka tyylien lisäämistä varten
+      <div className={className}> 
+        {message}
+      </div>
+    )
+  }
+
   if (user === null) {
     return (
       <div>
         <h2>Log in to application</h2>
+        <Notification message={errorMessage} type ="error"/>
         <form onSubmit = {handleLogin}>
           <div>
             username <input
@@ -120,6 +139,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
+      <Notification message={successMessage} type ="success"/>
       <p>{user.name} logged in
       <button onClick={handleResetToken}>logout</button>
       </p>
