@@ -84,16 +84,20 @@ const App = () => {
       });
   
       if (response.ok) {
-        console.log('Blog created');
+        console.log('Blog created')
       } 
       
       else {
-        console.error('Error:', response.status);
+        console.error('Error:', response.status)
+        setErrorMessage("add all necessary blog information")
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
       }
     } catch (exception) {
-      console.error('Error', exception);
+      console.error('Error', exception)
     }
-  };
+  }
 
   const handleResetToken = () => {
     localStorage.removeItem('token')
@@ -144,6 +148,7 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <Notification message={successMessage} type ="success"/>
+      <Notification message={errorMessage} type ="error"/>
       <p>{user.name} logged in
       <button onClick={handleResetToken}>logout</button>
       </p>
