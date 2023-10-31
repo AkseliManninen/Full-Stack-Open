@@ -32,77 +32,68 @@ const App = () => {
     }
   }, [])
 
-  // sisäänkijrautuminen
-  const handleLogin = (event) => {
-    event.preventDefault();
-  
-    fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Wrong username or password');
-        }
+  const handleLogin = async (event) => {
+    event.preventDefault()
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
       })
-      .then((data) => {
-        setUser(data);
-        console.log('Login successful');
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('name', data.name);
-      })
-      .catch((error) => {
-        setErrorMessage(error.message);
-        console.error('Login failed:', error);
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 5000);
-      });
-  };
-  
+
+      if (response.ok) {
+        const data = await response.json()
+        setUser(data)
+
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('name', data.name)
+      } else {
+        console.error('Login failed:')
+        setErrorMessage("wrong username or password")
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+      }
+    } catch (exception) {
+      console.error('Network error:', exception)
+    }
+  }
+
   // Lisää uuden blogin
-  const handleAddBlog = (event) => {
+  const handleAddBlog = async (event) => {
     event.preventDefault()
   
     const newBlog = {
       title: newBlogTitle,
       author: newBlogAuthor,
       url: newBlogURL,
-      likes: 0,
-    }
+      likes: 0, 
+    };
   
-    fetch('/api/blogs', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`,
-      },
-      body: JSON.stringify(newBlog),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log('Blog added successfully')
-          return blogService.getAll()
-        } else {
-          throw new Error('Give all necessary blog information')
-        }
-      })
-      .then((updatedBlogs) => {
-        setBlogs(updatedBlogs)
-      })
-      .catch((error) => {
-        setErrorMessage(error.message)
-        console.error('Error:', error)
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000);
-      })
-  }
+    try {
+      const response = await fetch('/api/blogs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(newBlog), 
+      });
+  
+      if (response.ok) {
+        console.log('Blog created');
+      } 
+      
+      else {
+        console.error('Error:', response.status);
+      }
+    } catch (exception) {
+      console.error('Error', exception);
+    }
+  };
 
   const handleResetToken = () => {
     localStorage.removeItem('token')
@@ -177,5 +168,3 @@ const App = () => {
 }
 
 export default App
-
-
