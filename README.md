@@ -10,7 +10,7 @@ Osa-3 exercises read 4/4, exercises 22/22 🟢
 
 Osa-4 exercises read 4/4, 21/23 🟢 (skipped 4.22* and 4.23*)
 
-Osa-5 exercises read 1/4 5/23 🟡 
+Osa-5 exercises read 1/4 8/23 🟡 (5.1-5.8)
 
 Osa-6 exercises 0/21 🔴
 
@@ -23,4 +23,5 @@ Osa-7 exercises 0/21 🔴
 🔴 = Not started
 
 Excercises: 
-87 / 116+
+Done: 90 / 116+
+Remaining: 26+
