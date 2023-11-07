@@ -74,7 +74,7 @@ const App = () => {
             setTimeout(() => {
                 setSuccessMessage(null)
             }, 5000)
-            setUpdateBlogs(true)
+            setUpdateBlogs(!updateBlogs)
         } catch (exception) {
             setErrorMessage('Add all necessary information')
             setTimeout(() => {
@@ -82,6 +82,15 @@ const App = () => {
             }, 5000)
         }
       }
+    
+    // funktio: lisää tykkäyksen
+    const addLike = async (id, blogMoreLikes) => {
+        console.log("Trying to add a like")
+        await blogService.update(id, blogMoreLikes)
+        console.log("Succesfully added a like")
+        setUpdateBlogs(!updateBlogs)
+        console.log("Updated bloglist")
+    }
 
     // komponentti: antaa ilmoituksen
     const Notification = ({ message, type}) => {
@@ -134,7 +143,7 @@ const App = () => {
         </p>
         <BlogForm createBlog={addBlog}/>
         {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} />
+            <Blog key={blog.id} blog={blog} addLike={addLike}/>
         )}
         </div>
         )

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, addLike }) => {
   const [blogInfoVisible, setBlogInfoVisible] = useState(false)
   const hideWhenVisible = { display: blogInfoVisible ? 'none' : '' }
   const showWhenVisible = {
@@ -10,6 +10,18 @@ const Blog = ({ blog }) => {
     borderWidth: 1,
     marginBottom: 5,
     display: blogInfoVisible ? '' : 'none' 
+  }
+
+  const handleAddLike = () => {
+    console.log("Adding a like")
+    const blogMoreLikes = {
+      title: blog.title,
+      author: blog.author,
+      url: blog.url,
+      likes: blog.likes + 1,
+    }
+    console.log("Passing to addLike function")
+    addLike(blog.id, blogMoreLikes)
   }
 
   return(
@@ -24,7 +36,7 @@ const Blog = ({ blog }) => {
         <div>{blog.url}</div>
         <div>
           likes {blog.likes}
-          <button type="button">like</button>
+          <button type="button" onClick = {handleAddLike}>like</button>
         </div>
         <div>{blog.user ? blog.user.name : "Unknown User"}</div>
       </div>

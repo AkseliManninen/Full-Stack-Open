@@ -86,6 +86,8 @@ blogsRouter.put('/:id', async (request, response, next) => {
     const updatedBlog = await originalBlog.save()
 
     response.json(updatedBlog)
+
+    return response.status(200).json({error: "Succesfully put"})
   } catch (error) {
     next(error)
   }
