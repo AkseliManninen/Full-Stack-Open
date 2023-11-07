@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import BlogForm from './components/BlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -10,9 +11,6 @@ const App = () => {
   const [user, setUser] = useState(null) 
   const [errorMessage, setErrorMessage] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
-  const [newBlogTitle, setNewBlogTitle] = useState('')
-  const [newBlogAuthor, setNewBlogAuthor] = useState('')
-  const [newBlogURL, setNewBlogURL] = useState('')
   const [updateBlogs, setUpdateBlogs] = useState(false)
 
     // effect hook blogien hakemista varten
@@ -59,15 +57,14 @@ const App = () => {
         }
     }
 
-    const addBlog = async (event) => {
-        console.log("Trying to add a blog")
-        event.preventDefault()
-        const newBlog = {
-            title: newBlogTitle,
-            author: newBlogAuthor,
-            url: newBlogURL,
-        }
+    // poistaa tokenin uloskirjautuessa
+    const handleResetToken = () => {
+        localStorage.removeItem('loggedUser')
+        console.log('Removing token')
+    }
     
+    // funktio: Lisää uuden blogin
+    const addBlog = async (newBlog) => {
         try {
             console.log("Starting creating a blog")
             const blog = await blogService.create(newBlog)
@@ -82,15 +79,9 @@ const App = () => {
             setErrorMessage('Add all necessary information')
             setTimeout(() => {
                 setErrorMessage(null)
-            }, 5000);
+            }, 5000)
         }
-    };
-
-    // poistaa tokenin uloskirjautuessa
-    const handleResetToken = () => {
-        localStorage.removeItem('loggedUser')
-        console.log('Removing token')
-    }
+      }
 
     // komponentti: antaa ilmoituksen
     const Notification = ({ message, type}) => {
@@ -141,19 +132,7 @@ const App = () => {
         <p>{user.name} logged in
         <button onClick={handleResetToken}>logout</button>
         </p>
-        <h2>create new</h2>
-        <form onSubmit={addBlog}>
-            <div>
-            title: <input value={newBlogTitle} onChange={(event) => setNewBlogTitle(event.target.value)} />
-            </div>
-            <div>
-            author: <input value={newBlogAuthor} onChange={(event) => setNewBlogAuthor(event.target.value)} />
-            </div>
-            <div>
-            url: <input value={newBlogURL} onChange={(event) => setNewBlogURL(event.target.value)} />
-            </div>
-            <button type="submit">create</button>
-        </form>
+        <BlogForm createBlog={addBlog}/>
         {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
         )}
