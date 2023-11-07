@@ -2,9 +2,7 @@ import { useState } from 'react'
 
 const Blog = ({ blog }) => {
   const [blogInfoVisible, setBlogInfoVisible] = useState(false)
-
   const hideWhenVisible = { display: blogInfoVisible ? 'none' : '' }
-
   const showWhenVisible = {
     paddingTop: 10,
     paddingLeft: 2,
