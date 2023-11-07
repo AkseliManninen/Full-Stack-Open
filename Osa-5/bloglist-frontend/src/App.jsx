@@ -17,7 +17,7 @@ const App = () => {
     useEffect(() => {
         console.log("Fetching all blogs")
         blogService.getAll().then(blogs =>
-        setBlogs( blogs )
+        setBlogs( blogs.sort() )
         )  
     }, [updateBlogs])
 
