@@ -4,7 +4,7 @@ const BlogForm = ({ createBlog }) => {
   const [newBlogTitle, setNewBlogTitle] = useState('')
   const [newBlogAuthor, setNewBlogAuthor] = useState('')
   const [newBlogURL, setNewBlogURL] = useState('')
-  const [blogFormVisible, setLoginVisible] = useState(false)
+  const [blogFormVisible, setBlogFormVisible] = useState(false)
 
   const addBlog = async (event) => {
     console.log("Trying to add a blog")
@@ -23,7 +23,7 @@ const BlogForm = ({ createBlog }) => {
     return (
     <div>
       <div style={hideWhenVisible}>
-          <button onClick={() => setLoginVisible(true)}>new note</button>
+          <button onClick={() => setBlogFormVisible(true)}>new note</button>
       </div>
       <div style={showWhenVisible}>
         <h2>create new</h2>
@@ -39,7 +39,7 @@ const BlogForm = ({ createBlog }) => {
             </div>
               <button type="submit">create</button>
             <div>
-              <button type="button" onClick={() => setLoginVisible(false)}>cancel</button>
+              <button type="button" onClick={() => setBlogFormVisible(false)}>cancel</button>
             </div>
         </form>
       </div>
