@@ -7,25 +7,32 @@ const setToken = newToken => {
   token = `Bearer ${newToken}`
 }
 
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+const getAll = async () => {
+  const request = await axios.get(baseUrl)
+  return request.data
 }
 
-const create = (newObject, auth) => {
-  setToken(auth)
+const create = async (newObject) => {
   const config = { headers: { Authorization: token } }
+  console.log("Creating configuration")
+  console.log(config)
 
-  return axios.post(baseUrl, newObject, config)
-    .then(response => response.data)
-    .catch(error => {
-      throw error
-    })
+  try {
+    console.log("Starting posting")
+    const response = await axios.post(baseUrl, newObject, config)
+    console.log("reponse acquired")
+    return response.data
+  } 
+  catch (error) {
+    throw error
+  }
 }
 
-const update = (id, newObject) => {
-  const request = axios.put(`${ baseUrl } /${id}`, newObject)
-  return request.then(response => response.data)
+const update = async (id, newObject) => {
+  const response = await axios.put(`${ baseUrl }/${id}`, newObject)
+  
+  return response.data
+
 }
 
 export default { getAll, create, update, setToken }

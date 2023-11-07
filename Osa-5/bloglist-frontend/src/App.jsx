@@ -13,15 +13,19 @@ const App = () => {
   const [newBlogTitle, setNewBlogTitle] = useState('')
   const [newBlogAuthor, setNewBlogAuthor] = useState('')
   const [newBlogURL, setNewBlogURL] = useState('')
+  const [updateBlogs, setUpdateBlogs] = useState(false)
 
+    // effect hook blogien hakemista varten
     useEffect(() => {
+        console.log("Fetching all blogs")
         blogService.getAll().then(blogs =>
         setBlogs( blogs )
         )  
-    }, [])
+    }, [updateBlogs])
 
     // effect hook sisäänkirjautumisen tarkistamiseen
     useEffect(() => {
+        console.log("Checking if login credentials are stored locally")
         const loggedUserJSON = window.localStorage.getItem('loggedUser')
         if (loggedUserJSON) {
           const user = JSON.parse(loggedUserJSON)
@@ -31,8 +35,9 @@ const App = () => {
       }, [])
 
     const handleLogin = async (event) => {
+        console.log("Trying to log in")
         event.preventDefault()
-        
+    
         try {
         const user = await loginService.login({
             username, password,
@@ -54,31 +59,32 @@ const App = () => {
         }
     }
 
-    const addBlog = (event) => {
+    const addBlog = async (event) => {
+        console.log("Trying to add a blog")
         event.preventDefault()
-        const auth = user.token
         const newBlog = {
             title: newBlogTitle,
             author: newBlogAuthor,
             url: newBlogURL,
         }
-
-        blogService
-        .create(newBlog, auth)
-        .then(blog => {
-          setBlogs(blogs.concat(blog))
-          setSuccessMessage(`A new blog ${newBlogTitle} by ${newBlogAuthor} added`)
-          setTimeout(() => {
-            setSuccessMessage(null)
-          }, 5000)
-        })
-        .catch((exception) => {
-          setErrorMessage('Add all necessary information')
-          setTimeout(() => {
-            setErrorMessage(null);
-          }, 5000)
-        })
-    }
+    
+        try {
+            console.log("Starting creating a blog")
+            const blog = await blogService.create(newBlog)
+            console.log("Blog created")
+            setBlogs(blogs.concat(blog))
+            setSuccessMessage(`A new blog ${newBlog.title} by ${newBlog.author} added`)
+            setTimeout(() => {
+                setSuccessMessage(null)
+            }, 5000)
+            setUpdateBlogs(true)
+        } catch (exception) {
+            setErrorMessage('Add all necessary information')
+            setTimeout(() => {
+                setErrorMessage(null)
+            }, 5000);
+        }
+    };
 
     // poistaa tokenin uloskirjautuessa
     const handleResetToken = () => {
@@ -156,3 +162,6 @@ const App = () => {
     }
 
 export default App
+
+
+
