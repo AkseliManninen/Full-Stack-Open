@@ -21,14 +21,14 @@ const Blog = ({ blog }) => {
         <button type="button" onClick={() => setBlogInfoVisible(true)}>view</button>
       </div> 
       <div style={showWhenVisible}>
-        {blog.title} 
+        {blog.title} {blog.author} 
         <button type="button" onClick={() => setBlogInfoVisible(false)}>hide</button>
         <div>{blog.url}</div>
         <div>
           likes {blog.likes}
           <button type="button">like</button>
         </div>
-        <div>{blog.author}</div>
+        <div>{blog.user ? blog.user.name : "Unknown User"}</div>
       </div>
   </div>  
   )
