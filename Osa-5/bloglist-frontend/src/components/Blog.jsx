@@ -39,6 +39,9 @@ const Blog = ({ blog, addLike }) => {
           <button type="button" onClick = {handleAddLike}>like</button>
         </div>
         <div>{blog.user ? blog.user.name : "Unknown User"}</div>
+        <div>
+          <button type="button" onClick = {handleAddLike}>remove</button>
+        </div>  
       </div>
   </div>  
   )
