@@ -92,6 +92,15 @@ const App = () => {
         console.log("Updated bloglist")
     }
 
+    // funktio: poistaa blogin
+    const removeBlog = async (removeBlogId) => {
+        console.log("Trying to remove a blog")
+        await blogService.remove(removeBlogId)
+        console.log("Succesfully removed a blog")
+        setUpdateBlogs(!updateBlogs)
+        console.log("Updated bloglist")
+    }
+
     // komponentti: antaa ilmoituksen
     const Notification = ({ message, type}) => {
         if (message === null) {
@@ -143,7 +152,7 @@ const App = () => {
         </p>
         <BlogForm createBlog={addBlog}/>
         {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} addLike={addLike}/>
+            <Blog key={blog.id} blog={blog} addLike={addLike} removeBlog={removeBlog}/>
         )}
         </div>
         )

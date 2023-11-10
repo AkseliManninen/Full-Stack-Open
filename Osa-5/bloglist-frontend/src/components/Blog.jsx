@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Blog = ({ blog, addLike }) => {
+const Blog = ({ blog, addLike, removeBlog }) => {
   const [blogInfoVisible, setBlogInfoVisible] = useState(false)
   const hideWhenVisible = { display: blogInfoVisible ? 'none' : '' }
   const showWhenVisible = {
@@ -26,6 +26,7 @@ const Blog = ({ blog, addLike }) => {
 
   const handleRemoveBlog = () => {
     console.log("Removing a blog")
+    removeBlog(blog.id)
   }
 
   return(
