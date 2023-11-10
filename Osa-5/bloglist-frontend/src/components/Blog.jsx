@@ -24,6 +24,10 @@ const Blog = ({ blog, addLike }) => {
     addLike(blog.id, blogMoreLikes)
   }
 
+  const handleRemoveBlog = () => {
+    console.log("Removing a blog")
+  }
+
   return(
     <div>
       <div style={hideWhenVisible}>
@@ -40,7 +44,7 @@ const Blog = ({ blog, addLike }) => {
         </div>
         <div>{blog.user ? blog.user.name : "Unknown User"}</div>
         <div>
-          <button type="button" onClick = {handleAddLike}>remove</button>
+          <button type="button" onClick = {handleRemoveBlog}>remove</button>
         </div>  
       </div>
   </div>  
