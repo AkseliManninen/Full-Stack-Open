@@ -44,7 +44,7 @@ const Blog = ({ blog, addLike, removeBlog, user }) => {
   return(
     <div>
       <div style={hideWhenVisible}>
-        {blog.title}
+        {blog.title} {blog.author} 
         <button type="button" onClick={() => setBlogInfoVisible(true)}>view</button>
       </div> 
       <div style={showWhenVisible}>
