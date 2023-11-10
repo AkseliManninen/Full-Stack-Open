@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { PropTypes } from 'prop-types'
 
 const BlogForm = ({ createBlog }) => {
   const [newBlogTitle, setNewBlogTitle] = useState('')
@@ -15,7 +16,13 @@ const BlogForm = ({ createBlog }) => {
         url: newBlogURL,
     }
     createBlog(newBlog)
-  } 
+  }
+  
+  // PropTypes
+  BlogForm.propTypes = {
+    createBlog: PropTypes.func.isRequired,
+    blogFormVisible: PropTypes.bool.isRequired
+  }
 
   const hideWhenVisible = { display: blogFormVisible ? 'none' : '' }
   const showWhenVisible = { display: blogFormVisible ? '' : 'none' }

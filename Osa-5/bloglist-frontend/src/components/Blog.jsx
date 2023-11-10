@@ -12,6 +12,12 @@ const Blog = ({ blog, addLike, removeBlog, user }) => {
     display: blogInfoVisible ? '' : 'none' 
   }
 
+  // PropTypes
+  Blog.propTypes = {
+    addLike: PropTypes.func.isRequired,
+    removeBlog: PropTypes.func.isRequired,
+  }
+
   const handleAddLike = () => {
     console.log("Adding a like")
     const blogMoreLikes = {
