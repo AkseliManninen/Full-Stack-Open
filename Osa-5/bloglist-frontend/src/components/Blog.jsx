@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { PropTypes } from 'prop-types'
 
 const Blog = ({ blog, addLike, removeBlog, user }) => {
   const [blogInfoVisible, setBlogInfoVisible] = useState(false)
@@ -9,7 +10,7 @@ const Blog = ({ blog, addLike, removeBlog, user }) => {
     border: 'solid',
     borderWidth: 1,
     marginBottom: 5,
-    display: blogInfoVisible ? '' : 'none' 
+    display: blogInfoVisible ? '' : 'none'
   }
 
   // PropTypes
@@ -19,20 +20,20 @@ const Blog = ({ blog, addLike, removeBlog, user }) => {
   }
 
   const handleAddLike = () => {
-    console.log("Adding a like")
+    console.log('Adding a like')
     const blogMoreLikes = {
       title: blog.title,
       author: blog.author,
       url: blog.url,
       likes: blog.likes + 1,
     }
-    console.log("Passing to addLike function")
+    console.log('Passing to addLike function')
     addLike(blog.id, blogMoreLikes)
   }
 
   const handleRemoveBlog = () => {
     if(window.confirm(`Remove blog ${blog.title} by ${blog.author}`)){
-      console.log("Removing a blog")
+      console.log('Removing a blog')
       removeBlog(blog.id)
     }
   }
@@ -50,21 +51,21 @@ const Blog = ({ blog, addLike, removeBlog, user }) => {
   return(
     <div>
       <div style={hideWhenVisible}>
-        {blog.title} {blog.author} 
+        {blog.title} {blog.author}
         <button type="button" onClick={() => setBlogInfoVisible(true)}>view</button>
-      </div> 
+      </div>
       <div style={showWhenVisible}>
-        {blog.title} {blog.author} 
+        {blog.title} {blog.author}
         <button type="button" onClick={() => setBlogInfoVisible(false)}>hide</button>
         <div>{blog.url}</div>
         <div>
           likes {blog.likes}
           <button type="button" onClick = {handleAddLike}>like</button>
         </div>
-        <div>{blog.user ? blog.user.name : "Unknown User"}</div>
+        <div>{blog.user ? blog.user.name : 'Unknown User'}</div>
         {deleteButton()}
       </div>
-  </div>  
+    </div>
   )
 }
 
