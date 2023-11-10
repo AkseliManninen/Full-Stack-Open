@@ -25,8 +25,10 @@ const Blog = ({ blog, addLike, removeBlog, user }) => {
   }
 
   const handleRemoveBlog = () => {
-    console.log("Removing a blog")
-    removeBlog(blog.id)
+    if(window.confirm(`Remove blog ${blog.title} by ${blog.author}`)){
+      console.log("Removing a blog")
+      removeBlog(blog.id)
+    }
   }
 
   const deleteButton = () => {
