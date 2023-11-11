@@ -24,7 +24,8 @@ test('renders content (after view)', async () => {
     title: 'Component testing title',
     author: 'Component testing author',
     url: 'url.fi',
-    likes: '20'
+    likes: '20',
+    user: { name: 'Component testing user' }
   }
   const mockHandler = jest.fn()
 
@@ -40,5 +41,9 @@ test('renders content (after view)', async () => {
   )
   expect(div).toHaveTextContent(
     'likes 20'
+  )
+
+  expect(div).toHaveTextContent(
+    'Component testing user'
   )
 })
