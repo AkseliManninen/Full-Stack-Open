@@ -32,17 +32,17 @@ const BlogForm = ({ createBlog }) => {
       <div style={hideWhenVisible}>
         <button onClick={() => setBlogFormVisible(true)}>new note</button>
       </div>
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible} className = "formDiv">
         <h2>create new</h2>
         <form onSubmit={addBlog}>
           <div>
-            title: <input value={newBlogTitle} onChange={event => setNewBlogTitle(event.target.value)} />
+            title: <input value={newBlogTitle} onChange={event => setNewBlogTitle(event.target.value)} placeholder='write title'/>
           </div>
           <div>
-            author: <input value={newBlogAuthor} onChange={event => setNewBlogAuthor(event.target.value)} />
+            author: <input value={newBlogAuthor} onChange={event => setNewBlogAuthor(event.target.value)} placeholder='write author'/>
           </div>
           <div>
-            url: <input value={newBlogURL} onChange={event => setNewBlogURL(event.target.value)} />
+            url: <input value={newBlogURL} onChange={event => setNewBlogURL(event.target.value)} placeholder='write url'/>
           </div>
           <button type="submit">create</button>
           <div>

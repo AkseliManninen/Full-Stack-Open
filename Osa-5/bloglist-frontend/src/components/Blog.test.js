@@ -2,6 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Blog from './Blog'
+import BlogForm from './BlogForm'
 import userEvent from '@testing-library/user-event'
 
 
@@ -71,4 +72,28 @@ test('test like twice', async () => {
   await user.click(likeButton)
 
   expect(mockHandler.mock.calls).toHaveLength(2)
+})
+
+test('test creating a blog', async () => {
+  const user = userEvent.setup()
+  const createBlog = jest.fn()
+
+  render(<BlogForm createBlog={createBlog} />)
+
+  const titleInput = screen.getByPlaceholderText('write title')
+  const authorInput = screen.getByPlaceholderText('write author')
+  const urlInput = screen.getByPlaceholderText('write url')
+
+  const sendButton = screen.getByText('create')
+
+  await user.type(titleInput, 'Component testing title')
+  await user.type(authorInput, 'Component testing author')
+  await user.type(urlInput, 'Component testing url')
+
+  await user.click(sendButton)
+
+  const createdBlog = createBlog.mock.calls[0][0]
+  expect(createdBlog.title).toBe('Component testing title')
+  expect(createdBlog.author).toBe('Component testing author')
+  expect(createdBlog.url).toBe('Component testing url')
 })
