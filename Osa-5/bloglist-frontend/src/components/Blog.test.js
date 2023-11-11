@@ -27,9 +27,8 @@ test('renders content (after view)', async () => {
     likes: '20',
     user: { name: 'Component testing user' }
   }
-  const mockHandler = jest.fn()
 
-  const { container } = render(<Blog blog={blog} style={mockHandler}/>)
+  const { container } = render(<Blog blog={blog}/>)
 
   const user = userEvent.setup()
   const button = screen.getByText('view')
@@ -46,4 +45,30 @@ test('renders content (after view)', async () => {
   expect(div).toHaveTextContent(
     'Component testing user'
   )
+})
+
+
+test('test like twice', async () => {
+  const blog = {
+    title: 'Component testing title',
+    author: 'Component testing author',
+    url: 'url.fi',
+    likes: '20',
+    user: { name: 'Component testing user' }
+  }
+  const mockHandler = jest.fn()
+
+  render(<Blog blog={blog} addLike = {mockHandler}/>)
+
+  const user = userEvent.setup()
+
+  const viewButton =  screen.getByText('view')
+  await user.click(viewButton)
+
+  const likeButton = screen.getByText('like')
+
+  await user.click(likeButton)
+  await user.click(likeButton)
+
+  expect(mockHandler.mock.calls).toHaveLength(2)
 })
