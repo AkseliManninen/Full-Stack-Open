@@ -38,4 +38,7 @@ test('renders content (after view)', async () => {
   expect(div).toHaveTextContent(
     'url.fi'
   )
+  expect(div).toHaveTextContent(
+    'likes 20'
+  )
 })
