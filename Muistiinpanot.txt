@@ -135,6 +135,18 @@ a. Kirjautuminen frontendissa
 - Viten käynnistys portissa 3003: npm start -- --port 3003
 - Pitää käynnistää sekä frontend että backend erikseen npm start komennolla
 
+b. props.children ja proptypet
+
+c. React-sovellusten testaaminen
+
+- Testaamiseen käytetään FB:n Jest-kirjastoa sekä React Testin Library
+- Testauskattavuus: npm test -- --coverage --collectCoverageFrom='src/**/*.{jsx,js}'
+
+d. End to end -testaus
+- E2E-testausta tehdään kirjaston avulla esim. Selenium tai selaimessa Headless-moodissa
+- Backendin avaaminen testimoodissa npm run start:test --port 3003
+- Frontend avataan testeissä portissa 5173 käyttäen deviä. npm run dev --port 5173
+
 Sanastoa:
 
 - Middleware
