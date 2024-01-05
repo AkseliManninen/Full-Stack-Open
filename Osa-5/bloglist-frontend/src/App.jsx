@@ -127,7 +127,7 @@ const App = () => {
             password <input
               value = {password}
               onChange = {(event) => setPassword(event.target.value)}/>
-          s</div>
+          </div>
           <div>
             <button type="submit">login</button>
           </div>
