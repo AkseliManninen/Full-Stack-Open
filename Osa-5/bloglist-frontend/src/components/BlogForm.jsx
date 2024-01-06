@@ -16,6 +16,9 @@ const BlogForm = ({ createBlog }) => {
       url: newBlogURL,
     }
     createBlog(newBlog)
+    setNewBlogTitle('')
+    setNewBlogAuthor('')
+    setNewBlogURL('')
   }
 
   // PropTypes

@@ -47,22 +47,35 @@ describe('Blog app', function() {
       cy.get('#create-button').click()
       cy.contains('Blogin otsikko')
     })
+  })
 
-    it('A blog can be liked', function() {
+  describe('When logged in and blog created', function() {
+    beforeEach(function() {
+      cy.get('#username').type('käyttäjänimi')
+      cy.get('#password').type('salainen')
+      cy.get('#login-button').click()
       cy.contains('new blog').click()
-      cy.get('#title').type('Blogin otsikko')
+      cy.get('#title').type('Koirablogi')
       cy.get('#author').type('Blogin kirjoittaja')
       cy.get('#url').type('blog.fi')
       cy.get('#create-button').click()
-      cy.contains('new blog').click()
-      cy.get('#title').type('2')
-      cy.get('#author').type('2')
-      cy.get('#url').type('2')
+      cy.get('#title').type('Kissablogi')
+      cy.get('#author').type('Blogin kirjoittaja2')
+      cy.get('#url').type('blog.fi2')
       cy.get('#create-button').click()
-      cy.contains('Blogin kirjoittaja')
-        .contains('view').click
-      cy.contains('Blogin otsikko')
-        .contains('like').click
+    })
+
+    it('A blog can be liked', function() {
+      cy.contains('Koirablogi')
+        .contains('view')
+        .click()
+      cy.contains('Koirablogi')
+        .parent()
+        .find('button')
+        .filter(':contains("like")')
+        .click()
+        .parent()
+        .should('contain', 'likes 1')
     })
   })
 })
