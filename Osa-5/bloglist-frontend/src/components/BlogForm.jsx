@@ -30,21 +30,21 @@ const BlogForm = ({ createBlog }) => {
   return (
     <div>
       <div style={hideWhenVisible}>
-        <button onClick={() => setBlogFormVisible(true)}>new note</button>
+        <button onClick={() => setBlogFormVisible(true)}>new blog</button>
       </div>
       <div style={showWhenVisible} className = "formDiv">
         <h2>create new</h2>
         <form onSubmit={addBlog}>
           <div>
-            title: <input value={newBlogTitle} onChange={event => setNewBlogTitle(event.target.value)} placeholder='write title'/>
+            title: <input id = "title" value={newBlogTitle} onChange={event => setNewBlogTitle(event.target.value)} placeholder='write title'/>
           </div>
           <div>
-            author: <input value={newBlogAuthor} onChange={event => setNewBlogAuthor(event.target.value)} placeholder='write author'/>
+            author: <input id = "author" value={newBlogAuthor} onChange={event => setNewBlogAuthor(event.target.value)} placeholder='write author'/>
           </div>
           <div>
-            url: <input value={newBlogURL} onChange={event => setNewBlogURL(event.target.value)} placeholder='write url'/>
+            url: <input id = "url" value={newBlogURL} onChange={event => setNewBlogURL(event.target.value)} placeholder='write url'/>
           </div>
-          <button type="submit">create</button>
+          <button id = "create-button" type="submit">create</button>
           <div>
             <button type="button" onClick={() => setBlogFormVisible(false)}>cancel</button>
           </div>
