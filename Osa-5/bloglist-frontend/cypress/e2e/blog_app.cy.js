@@ -47,5 +47,22 @@ describe('Blog app', function() {
       cy.get('#create-button').click()
       cy.contains('Blogin otsikko')
     })
+
+    it('A blog can be liked', function() {
+      cy.contains('new blog').click()
+      cy.get('#title').type('Blogin otsikko')
+      cy.get('#author').type('Blogin kirjoittaja')
+      cy.get('#url').type('blog.fi')
+      cy.get('#create-button').click()
+      cy.contains('new blog').click()
+      cy.get('#title').type('2')
+      cy.get('#author').type('2')
+      cy.get('#url').type('2')
+      cy.get('#create-button').click()
+      cy.contains('Blogin kirjoittaja')
+        .contains('view').click
+      cy.contains('Blogin otsikko')
+        .contains('like').click
+    })
   })
 })
