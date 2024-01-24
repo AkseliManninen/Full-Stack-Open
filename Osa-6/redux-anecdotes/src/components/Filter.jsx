@@ -1,6 +1,6 @@
 const Filter = () => {
     const handleChange = (event) => {
-      // input-kentän arvo muuttujassa event.target.value
+        console.log(event.target.value)
     }
     const style = {
       marginBottom: 10
