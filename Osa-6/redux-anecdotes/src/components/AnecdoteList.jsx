@@ -8,7 +8,7 @@ const AnecdoteList = () => {
 
     const vote = (id) => {
         console.log('vote', id)
-        dispatch(voteAnecdote(id))
+        dispatch(voteAnecdote({ id: id }))
       }
 
       const filteredAnecdotes = anecdotes.filter(anecdote =>
