@@ -21,5 +21,5 @@ Osa-6 exercises 13/24 🟡
 🔴 = Not started
 
 Excercises: 
-Done: 115 / 116+  
-Remaining: 1+ 
+Done: 116 / 116+  
+Remaining: 0 
